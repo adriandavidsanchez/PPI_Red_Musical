@@ -1,0 +1,161 @@
+
+.genres-section12{
+  background-color: white;
+}
+.container12{
+  background-color: #f3f4f6;
+}
+body12 {
+  font-family: Arial, sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+}
+
+.header12 {
+  background-color: #18181b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.isotipo12 {
+  width: 55px;
+}
+
+.logo-container12 {
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido dentro del contenedor */
+  margin-left: 30px;
+}
+
+.featured-section12 {
+  justify-items: center;
+}
+
+.new-releases12 {
+  width: 25%;
+  padding-left: 40px;
+}
+
+.Discos12 {
+  width: 100px;
+  height: 100px;
+}
+
+.artists-grid12 {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  justify-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.img12 {
+  margin-left: 100px;
+}
+
+.artist12 {
+  text-align: center;
+}
+
+.artist12 img {
+  width: 310px;
+  height: 310px;
+  object-fit: cover;
+}
+
+.container12 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.logo12 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav12 a {
+  color: white;
+  margin-right: 1.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.main12 {
+  flex: 1;
+}
+
+.new-releases12 {
+  margin-left: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  width: 25%;
+}
+
+.featured-artists12 {
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding-right: 0px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+
+.artist12, .release12 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.genre12 {
+  background-color: #e5e7eb;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.genre12:hover {
+  transform: scale(1.05);
+}
+
+.genres-grid12 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.footer12 {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-nav12 a {
+  color: white;
+  margin-right: 1.5rem;
+  text-decoration: none;
+}
+
+.releases-list12 {
+  justify-content: flex-start;
+  align-items: flex-start; /* Asegura que los elementos se alineen al inicio verticalmente */
+}

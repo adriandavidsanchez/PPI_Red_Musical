@@ -1,0 +1,29 @@
+{
+  "Iniciar": [
+    {
+      "id": "1",
+      "name": "Juan",
+      "password": "12341234"
+    }
+  ],
+  "registrarUser": [
+    {
+      "id": "100",
+      "name": "david",
+      "email": "david@example.com",
+      "password": "12341234"
+    }
+    
+  ],
+  "registrarcataut": [
+    {
+      "id": "1000",
+      "name": "Laura",
+      "email": "laura@example.com",
+      "genre": "Rock",
+      "password": "12341234"
+    }
+  ]
+
+  
+}

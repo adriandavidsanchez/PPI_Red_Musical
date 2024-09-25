@@ -1,0 +1,235 @@
+/* Contenedor principal que centra todo */
+*letra1{
+    color: #000000;
+}
+.tttt{color:#000000;}
+
+.cat{
+    color:#6b7280;
+    display: flex; /* Para centrar el contenido */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+.container_ini1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #ffffff00;
+}
+
+  /* Estilos para la tarjeta principal */
+.card_ini1 {
+    display: flex;
+    width: 100%;
+    max-width: 824px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-left: 40px;margin-right: 40px;
+}
+
+  /* Contenedor de la imagen */
+.image-container_ini1 {
+    width: 1000px;
+}
+
+.image_ini1 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+  /* Contenedor del formulario */
+.form-container_ini1 {
+    padding-left: 10%;
+    padding-right: 5%;
+    width: 200px;
+    min-width: 200px; /* Establece el ancho mínimo */
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px
+    
+}
+
+  /* Botón de cierre */
+.close-button_ini1 {
+    display: flex;
+    justify-content: flex-end;
+    color: rgb(0, 0, 0);
+    margin-bottom: 13.4px;
+    margin-top: 13.4px;
+    margin-right: 13.4px;
+    margin-left: 13.4px;
+        border: none; /* Sin borde */
+        width: 13.4px; /* Ancho del botón */
+        height: 13.4px; /* Altura del botón */
+        display: flex; /* Para centrar el contenido */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+        font-size: 24px; /* Tamaño de la "X" */
+    
+}
+.button_ini2:hover {
+    background-color: #9ca3af1c; /* Cambia el color al pasar el ratón */
+}
+.button_ini2{
+    width: 100%;
+    background-color: #ffffff;
+    color: #6b7280;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.icon_ini1 {
+    width: 24px;
+    height: 24px;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.icon_ini1:hover {
+    color: #4b5563;
+}
+
+  /* Título y subtítulo */
+.title_ini1 {
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    font-family:"Montserrat", "Segoe UI", sans-serif;
+}
+
+.subtitle_ini1 {
+    margin-bottom: 32px;
+    text-align: center;
+    color: #6b7280;
+    font-family:"Montserrat", "Segoe UI", sans-serif;
+}
+
+  /* Estilos para los grupos de entrada */
+.input-group_ini1 {
+    margin-bottom: 16px;
+}
+
+.label-container_ini1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.label_ini1 {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    font-family:"Montserrat", "Segoe UI", sans-serif;
+    font-weight: bold;
+}
+
+  /* Estilos para los inputs */
+.input_ini1 {
+    width: 91%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+  /* Botón principal */
+.button_ini1 {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button_ini1:hover {
+    background-color: #2563eb;
+}
+
+  /* Texto del pie de página */
+.footer-text_ini1 {
+    margin-top: 16px;
+    font-size: 12px;
+    text-align: center;
+    color: #6b7280;
+    font-family:"Montserrat", "Segoe UI", sans-serif;
+}
+.link_ini1 {
+    color: #3b82f6;
+    text-decoration: none;
+    font-family:"Montserrat", "Segoe UI", sans-serif;
+}
+.link_ini1:hover {
+    text-decoration: underline;
+}
+
+
+.form-container_ini1 {
+    width: 50%; /* O el valor que tengas actualmente */
+    transition: width 0.5s ease-in-out;
+}
+
+.card_ini1 {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 750px) {
+    .image-container_ini1 {
+        width: 0;
+        opacity: 0;
+    }
+
+    .form-container_ini1 {
+        width: 100%; /* Cambiado de 0px a 100% para ocupar todo el espacio */
+    }
+
+    .card_ini1 {
+        justify-content: center;
+        align-items: center;
+    }
+    .label-container_ini1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80px;
+    }
+    .close-button_ini1{
+        margin-bottom: 100%;
+    }
+}
+.input_ini1[type="select"] {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+    
+    
+}
+
+.input_ini1[type="select"]::-ms-expand {
+    display: none;
+}
+
+.input_ini1[type="select"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+}

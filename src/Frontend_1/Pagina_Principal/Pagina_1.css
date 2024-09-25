@@ -1,0 +1,336 @@
+@charset "utf-8";
+
+/* CSS Document */
+*{
+	color:white;
+	background:none;
+}
+
+.background{
+	background:#2a2b3b;
+    
+}
+body{
+    background-color: #0f0d13; /* Cambia esto al color o imagen de fondo que prefieras */
+}
+
+.button-container {
+    display: flex; /* Para que los botones se mantengan en una fila */
+    gap: 10px; /* Espacio entre los botones */
+    align-items: center; /* Alineación vertical */
+	flex-shrink: 0; /* Previene que los botones se reduzcan demasiado */
+	transition: margin-left 0.3s ease;
+    transition: transform 0.5s ease;
+}
+
+.menu0 {
+	height: 70px;
+    display: flex; /* Aplica Flexbox */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    justify-content: space-between; /* Espacio igual entre los elementos */
+    background: #0f0d13;
+	transition: margin-left 0.3s ease;
+	border-bottom: 1px solid #555257;
+	padding-left: 192px;
+	padding-right: 100px;
+	overflow: hidden; /* Evita que los elementos se desborden */
+	transition: padding 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
+}
+.isotipo1{
+	color: white;
+	font-family: 'Impact', 'Franklin-Gothic-Heavy';
+	margin-left: 1%;
+	margin-right: 1%;
+	font-size: 18px;
+	margin-top: 100%;
+	white-space: nowrap;
+}
+
+.isotipo0 {
+    color: white;
+	width:65px;
+	filter: blur(0.44px);
+	font-family: 'Inter','Arial', 'sans-serif';
+	font-size:9px;
+	padding-bottom: 1%;
+    margin-right: 10px; /* Espacio entre el logo y el siguiente elemento */
+font-weight: bold;
+}
+.isotipo-container {
+    display: flex;
+    align-items: center;
+	width: 0px;
+	transition: margin-left 0.3s ease;
+	transition: margin-rigth 0.3s ease;
+	flex-shrink: 0;
+}
+.titulo2{
+    margin-top: 55px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: 'Oswald', 'Arial Black', Gadget, sans-serif;
+    text-align: center;
+    font-size: 58px;
+}
+.titulo1{
+    margin-top: 55px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'Oswald', 'Arial Black', Gadget, sans-serif;
+    text-align: center;
+    font-size: 58px;
+}
+.texto3{
+    color:rgb(169, 166, 170);
+    text-align: center;
+    font-family: "Inter", "Arial", sans-serif;
+    padding-right: 20px;
+
+}
+.texto4{
+    color:rgb(255, 255, 255);
+    font-family: "Inter", "Arial", sans-serif;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+
+}
+.texto5{
+    color:rgb(169, 166, 170);
+    text-align:left;
+    font-family: "Inter", "Arial", sans-serif;
+    padding-right: 20px;
+
+}
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    overflow: hidden;
+    margin-top: 60px;
+    padding-right: 5%;
+}
+.image-container img {
+    max-width: 30%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    top: -10%;
+}
+.image-container2 img{
+    max-height: 100%;
+    max-width: 90%;
+    width: 200%;
+    height: auto;
+    object-fit: contain;
+    top: -10%;
+}
+.image-container2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    overflow: hidden;
+    margin-top: 60px;
+    margin-bottom: 260px;
+    padding-right: 5%;
+}
+.image-container1 img {
+    max-width: 50%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    top: -10%;
+}
+.mama{
+    margin-left: 100px;
+    display: flex
+}
+
+.menu2{
+    height: 70px;
+    display: flex; /* Aplica Flexbox */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    justify-content: space-between; /* Espacio igual entre los elementos */
+	overflow: hidden; /* Evita que los elementos se desborden */
+	transition: padding 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
+
+    padding-right: 0px;
+    padding-left: 20px;
+    margin-top: 30px;
+    height: 120px;
+    margin-bottom: 30px;
+    border-bottom-width: 0px
+}
+@media (max-width: 1000px) {
+    .texto4{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu0 {
+        padding-left: 20px;
+        padding-right: 20px;
+        transition: padding 0.3s ease; /* Transición suave al ajustar el padding */
+    }
+    .titulo2{
+        font-size: 28px;
+    }
+
+    .menu1 {
+        gap: 15px;
+        transition: gap 0.3s ease; /* Transición suave para el espacio entre los enlaces */
+    }
+
+    .image-container img {
+        max-width: 70%;
+        max-height: 100%;
+    }
+    .texto4{
+        font-size: 13px;
+    }
+    .image-container1{
+        margin-bottom: 10px;
+    }
+    .mama{
+        margin-left: 10px
+    }
+}
+.cuadros1 {
+    width: 32.33%;
+    background: #1b191f;
+    height: 90px;
+    border-radius: 15px;
+    
+}
+@media (max-width: 500px) {
+    .button-container{
+        transform: translateX(100%);
+        
+    }
+    .texto4{
+        font-size: 12px;
+    }
+    .cuadros1 {
+        width: 190px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    .menu0 {
+        padding-left: 10px;
+        padding-right: 10px;
+        transition: padding 0.3s ease; /* Transición suave al ajustar el padding */
+    }
+
+    .menu1 {
+        gap: 10px;
+        transition: gap 0.3s ease; /* Transición suave para el espacio entre los enlaces */
+    }
+}
+@media (max-width: 680px) {
+    .menu1{
+        transform: translateX(100%);
+        
+    }
+}
+
+.menu {
+  filter: blur(0.2px); /* Desenfoque del texto */
+	font-family: var(--font-default, "Inter", "Arial", sans-serif);
+    display: flex; /* Mantiene los enlaces en fila */
+    gap: 30px; /* Espacio entre los enlaces */
+	font-weight: 700;
+	
+}
+.menu1 {
+	filter: blur(0.5px); /* Desenfoque del texto */
+	font-family: var(--font-default, "Inter", "Arial", sans-serif);
+	display: flex; /* Mantiene los enlaces en fila */
+	gap: 30px; /* Espacio entre los enlaces */
+	font-weight: 700;
+	padding-left: 62%;
+	flex-grow: 1; /* Permite que el menú crezca para usar el espacio disponible */
+    justify-content: flex-start; /* Alinea los elementos al principio */
+    min-width: 0; /* Permite que se reduzca adecuadamente sin romper la alineación */
+    overflow: hidden; /* Evita que el contenido del menú desborde */
+	transition: gap 0.3s ease;
+}
+.rounded-button1 {
+    border-radius: 12px; /* Bordes redondeados */
+    background-color: #005bff; /* Color del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de mano */
+	white-space: nowrap;
+    border-top-width: 10px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-right: 15px;
+    padding-left: 15px;
+
+}
+.rounded-button {
+    border-radius: 12px; /* Bordes redondeados */
+    background-color: #0f0d13; /* Color del botón */
+    color: white; /* Color del texto */
+    border: 1px solid #555257; /* Borde en todos los lados */
+    cursor: pointer; /* Cursor de mano */
+    white-space: nowrap;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: 20px;
+
+}
+
+
+.rounded-button1:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el ratón */
+}
+
+.titulo{
+	text-align: center;
+	background:none;
+
+
+}
+
+.espacioenblanco{
+	width: 200px;
+	height: 20opx;
+	
+}
+
+.container {
+    
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Asegúrate de que el contenedor ocupe toda la altura de la ventana */
+}
+
+.aux{
+    
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+.menu1 a {
+    text-decoration: none; /* QUITAR LINEA blanca */
+}
