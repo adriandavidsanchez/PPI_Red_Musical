@@ -5,12 +5,12 @@
   max-width: 100%;
 }
 .carousel-control-prev {
-  left: -30px; /* Ajusta la distancia a la izquierda */
-  transform: translateX(-100%); /* Mueve la flecha más a la izquierda */
+  left: -30px;
+  transform: translateX(-100%);
 }
 .carousel-control-next {
-  right: -30px; /* Ajusta la distancia a la derecha */
-  transform: translateX(100%); /* Mueve la flecha más a la derecha */
+  right: -30px;
+  transform: translateX(100%);
 }
 
 .carousel-indicators {
@@ -23,8 +23,7 @@
 }
 .genre-card12 {
   border: 1px solid  #f3f4f6;
-  ; /* Ajusta el borde según el estilo deseado */
-  border-radius: 9px; /* Opcional: Bordes redondeados */
+  border-radius: 9px;
 }
 .card{
   background-color: #f3f4f6;
@@ -32,7 +31,7 @@
 
 .genre-card12 .card-body {
   padding: 10px;
-   background-color: #f3f4f6; /* Fondo gris claro */
+  background-color: #f3f4f6;
 }
 
 h3.m-0 {
@@ -47,6 +46,6 @@ h3.m-0 {
 .icon-text-container44 {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente */
-  justify-content: center; /* Centra verticalmente */
+  align-items: center;
+  justify-content: center;
 }

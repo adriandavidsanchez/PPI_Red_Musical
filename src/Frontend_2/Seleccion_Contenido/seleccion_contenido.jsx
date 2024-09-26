@@ -7,10 +7,9 @@ return (
 <div>
     <div className="container">
         <header>
-            <h1>♪ Music Player</h1>
-            <div>
-                <span></span>
-                <span></span>
+        <div className="logo-container12">
+            <img className='isotipo12' src="src/assets/imagenes/isotipo1.svg" alt="Isotipo" />
+            <h1 style={{ alignItems: 'center' }} className="logo12">Bad Melody - Rock</h1> 
             </div>
         </header>
 
@@ -22,30 +21,72 @@ return (
                         <tr>
                             <th>#</th>
                             <th>Song</th>
-                            <th>Duration</th>
+                            <th style={{ paddingRight: '0px',paddingLeft: '30px' }}>Duration</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
                             <td>
-                                <div>Starlight</div>
-                                <div className="artist">Muse</div>
+                                <div>Stairway to Heaven</div>
+                                <div className="artist">Led Zeppelin</div>
                             </td>
-                            <td>4:24</td>
+                            <td>8:02</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <div>Bohemian Rhapsody</div>
+                                <div className="artist">Queen</div>
+                            </td>
+                            <td>5:55</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <div>Hotel California</div>
+                                <div className="artist">Eagles</div>
+                            </td>
+                            <td>6:30</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <div>Sweet Child O’ Mine</div>
+                                <div className="artist">Guns N’ Roses</div>
+                            </td>
+                            <td>5:56</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <div>Smells Like Teen Spirit</div>
+                                <div className="artist">Nirvana</div>
+                            </td>
+                            <td>5:01</td>
                         </tr>
                     </tbody>
                 </table>
                 <div className="now-playing">
-            <h2>Now Playing</h2>
+            <h2>Reproducción Actual</h2>
             <div className="now-playing-info">
-                <div className="album-cover"></div>
+                <div className="album-cover1" >
+                    <img src="/src/assets/imagenes/Gestion-prueva/dis10.jpg" alt="Album Cover"></img>
+                </div>
                 <div>
-                    <h3>Starlight</h3>
-                    <p>Muse</p>
-                    <p>From the album "The 2nd Law"</p>
-                    <p>Released: September 28, 2012</p>
-                    <p>Genre: Alternative Rock</p>
+                    <h2>Foster The People</h2>
+                    <h3><b>- Pumped Up Kicks</b></h3>
+                    <p><b>Productores:</b> Mark Foster</p>
+                    <p><b>Lanzamiento:</b> 14 de septiembre, 2010</p>
+                    <p><b>Genre: </b>Rock</p>
                 </div>
             </div>
             <div >
@@ -56,19 +97,19 @@ return (
 
             <div className="album-details">
                 <div>
-                    <h2>Related Albums</h2>
+                    <h2>Descripción</h2>
                     <div className="related-albums">
                         <div>
-                            <div className="album-cover"></div>
-                            <p>Absolution</p>
-                            <p className="artist">Muse</p>
+                            <div className="album-cover" >
+                                <img src="/src/assets/imagenes/Gestion-prueva/dis10.jpg" alt="Album Cover"></img>
+                            </div>
                         </div>
                     </div>
-                    <h3>The 2nd Law</h3>
-                    <p>Muse</p>
-                    <p>The 2nd Law is the sixth studio album by the English rock band Muse,
-released on 28 September 2012 through Warner Bros. Records. The album 
-was produced by the band and mixed by English producer Markus Dravs.</p>
+                    <h3>Foster The People</h3>
+                    <p>Pumped Up Kicks</p>
+                    <p>“Pumped Up Kicks” es conocida por su melodía pegajosa y su ritmo ligero, La inspiración para la canción surgió
+                            de la intención de Foster de explorar la mente de un adolescente aislado y perturbado, reflejando problemas
+                            de salud mental y violencia juvenil.</p>
 
                 </div>
                 <h2>Album Details</h2>

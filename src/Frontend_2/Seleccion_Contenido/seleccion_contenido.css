@@ -19,14 +19,23 @@ body {
     max-width: 90%;
     margin: 0 auto;
 }
-
+.logo12{
+    margin-left: 30px;
+}
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
-
+.logo-container12 {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+}
+.isotipo12 {
+    width: 75px;
+}
 .main-content {
     display: flex;
     gap: 20px;
@@ -34,10 +43,13 @@ header {
 
 .playlist {
     flex-grow: 1;
+    margin-left: 150px;
+    margin-right: 100px;
 }
 
 .album-details {
     width: 300px;
+    margin-right: 150px;
 }
 
 table {
@@ -70,7 +82,7 @@ th, td {
 }
 
 .progress {
-    background-color: #4CAF50;
+    background-color: #000000;
     height: 100%;
     width: 30%;
 }
@@ -99,6 +111,16 @@ th, td {
     height: 100px;
     background-color: #ddd;
     margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.album-cover1 {
+    width: 200px;
+    height: 200px;
+    background-color: #ddd;
+    margin-bottom: 5px;
+    overflow: hidden;
+    border-radius: 5%;
 }
 
 .artist {
@@ -110,3 +132,63 @@ th, td {
     display: flex;
     gap: 20px;
 }
+.album-cover img,.album-cover1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+thead th {
+    text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+td, th {
+    border: none;
+    padding: 10px;
+}
+
+
+td:first-child {
+    width: 3%;
+    text-align: left;
+}
+
+
+td:last-child {
+    width: 10%;
+    text-align: right;
+}
+
+
+tbody tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+tbody tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+

@@ -1,4 +1,4 @@
-/* Contenedor principal que centra todo */
+
 *letra1{
     color: #000000;
 }
@@ -6,9 +6,9 @@
 
 .cat{
     color:#6b7280;
-    display: flex; /* Para centrar el contenido */
-    align-items: center; /* Centrar verticalmente */
-    justify-content: center; /* Centrar horizontalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container_ini1 {
@@ -19,7 +19,7 @@
     background-color: #ffffff00;
 }
 
-  /* Estilos para la tarjeta principal */
+
 .card_ini1 {
     display: flex;
     width: 100%;
@@ -31,7 +31,7 @@
     margin-left: 40px;margin-right: 40px;
 }
 
-  /* Contenedor de la imagen */
+
 .image-container_ini1 {
     width: 1000px;
 }
@@ -42,19 +42,19 @@
     object-fit: cover;
 }
 
-  /* Contenedor del formulario */
+
 .form-container_ini1 {
     padding-left: 10%;
     padding-right: 5%;
     width: 200px;
-    min-width: 200px; /* Establece el ancho mínimo */
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     margin-top: 30px
     
 }
 
-  /* Botón de cierre */
+
 .close-button_ini1 {
     display: flex;
     justify-content: flex-end;
@@ -63,18 +63,18 @@
     margin-top: 13.4px;
     margin-right: 13.4px;
     margin-left: 13.4px;
-        border: none; /* Sin borde */
-        width: 13.4px; /* Ancho del botón */
-        height: 13.4px; /* Altura del botón */
-        display: flex; /* Para centrar el contenido */
-        align-items: center; /* Centrar verticalmente */
-        justify-content: center; /* Centrar horizontalmente */
-        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-        font-size: 24px; /* Tamaño de la "X" */
+        border: none;
+        width: 13.4px;
+        height: 13.4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 24px;
     
 }
 .button_ini2:hover {
-    background-color: #9ca3af1c; /* Cambia el color al pasar el ratón */
+    background-color: #9ca3af1c;
 }
 .button_ini2{
     width: 100%;
@@ -97,7 +97,7 @@
     color: #4b5563;
 }
 
-  /* Título y subtítulo */
+
 .title_ini1 {
     margin-bottom: 16px;
     text-align: center;
@@ -114,7 +114,7 @@
     font-family:"Montserrat", "Segoe UI", sans-serif;
 }
 
-  /* Estilos para los grupos de entrada */
+
 .input-group_ini1 {
     margin-bottom: 16px;
 }
@@ -134,7 +134,7 @@
     font-weight: bold;
 }
 
-  /* Estilos para los inputs */
+
 .input_ini1 {
     width: 91%;
     padding: 8px;
@@ -144,7 +144,7 @@
     color: #6b7280;
 }
 
-  /* Botón principal */
+
 .button_ini1 {
     width: 100%;
     padding: 12px;
@@ -161,7 +161,7 @@
     background-color: #2563eb;
 }
 
-  /* Texto del pie de página */
+
 .footer-text_ini1 {
     margin-top: 16px;
     font-size: 12px;
@@ -180,7 +180,7 @@
 
 
 .form-container_ini1 {
-    width: 50%; /* O el valor que tengas actualmente */
+    width: 50%;
     transition: width 0.5s ease-in-out;
 }
 
@@ -188,7 +188,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-/* Media query para pantallas pequeñas */
+
 @media (max-width: 750px) {
     .image-container_ini1 {
         width: 0;
@@ -196,7 +196,7 @@
     }
 
     .form-container_ini1 {
-        width: 100%; /* Cambiado de 0px a 100% para ocupar todo el espacio */
+        width: 100%;
     }
 
     .card_ini1 {

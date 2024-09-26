@@ -11,29 +11,29 @@
     
 }
 body{
-    background-color: #0f0d13; /* Cambia esto al color o imagen de fondo que prefieras */
+    background-color: #0f0d13;
 }
 
 .button-container {
-    display: flex; /* Para que los botones se mantengan en una fila */
-    gap: 10px; /* Espacio entre los botones */
-    align-items: center; /* Alineación vertical */
-	flex-shrink: 0; /* Previene que los botones se reduzcan demasiado */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+	flex-shrink: 0;
 	transition: margin-left 0.3s ease;
     transition: transform 0.5s ease;
 }
 
 .menu0 {
 	height: 70px;
-    display: flex; /* Aplica Flexbox */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
-    justify-content: space-between; /* Espacio igual entre los elementos */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: #0f0d13;
 	transition: margin-left 0.3s ease;
 	border-bottom: 1px solid #555257;
 	padding-left: 192px;
 	padding-right: 100px;
-	overflow: hidden; /* Evita que los elementos se desborden */
+	overflow: hidden;
 	transition: padding 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
 }
 .isotipo1{
@@ -53,7 +53,7 @@ body{
 	font-family: 'Inter','Arial', 'sans-serif';
 	font-size:9px;
 	padding-bottom: 1%;
-    margin-right: 10px; /* Espacio entre el logo y el siguiente elemento */
+    margin-right: 10px;
 font-weight: bold;
 }
 .isotipo-container {
@@ -157,10 +157,10 @@ font-weight: bold;
 
 .menu2{
     height: 70px;
-    display: flex; /* Aplica Flexbox */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
-    justify-content: space-between; /* Espacio igual entre los elementos */
-	overflow: hidden; /* Evita que los elementos se desborden */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	overflow: hidden;
 	transition: padding 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
 
     padding-right: 0px;
@@ -180,7 +180,7 @@ font-weight: bold;
     .menu0 {
         padding-left: 20px;
         padding-right: 20px;
-        transition: padding 0.3s ease; /* Transición suave al ajustar el padding */
+        transition: padding 0.3s ease;
     }
     .titulo2{
         font-size: 28px;
@@ -188,7 +188,7 @@ font-weight: bold;
 
     .menu1 {
         gap: 15px;
-        transition: gap 0.3s ease; /* Transición suave para el espacio entre los enlaces */
+        transition: gap 0.3s ease;
     }
 
     .image-container img {
@@ -231,12 +231,12 @@ font-weight: bold;
     .menu0 {
         padding-left: 10px;
         padding-right: 10px;
-        transition: padding 0.3s ease; /* Transición suave al ajustar el padding */
+        transition: padding 0.3s ease;
     }
 
     .menu1 {
         gap: 10px;
-        transition: gap 0.3s ease; /* Transición suave para el espacio entre los enlaces */
+        transition: gap 0.3s ease;
     }
 }
 @media (max-width: 680px) {
@@ -247,32 +247,32 @@ font-weight: bold;
 }
 
 .menu {
-  filter: blur(0.2px); /* Desenfoque del texto */
+  filter: blur(0.2px);
 	font-family: var(--font-default, "Inter", "Arial", sans-serif);
-    display: flex; /* Mantiene los enlaces en fila */
-    gap: 30px; /* Espacio entre los enlaces */
+    display: flex;
+    gap: 30px;
 	font-weight: 700;
 	
 }
 .menu1 {
-	filter: blur(0.5px); /* Desenfoque del texto */
+	filter: blur(0.5px);
 	font-family: var(--font-default, "Inter", "Arial", sans-serif);
-	display: flex; /* Mantiene los enlaces en fila */
-	gap: 30px; /* Espacio entre los enlaces */
+	display: flex;
+	gap: 30px;
 	font-weight: 700;
 	padding-left: 62%;
-	flex-grow: 1; /* Permite que el menú crezca para usar el espacio disponible */
-    justify-content: flex-start; /* Alinea los elementos al principio */
-    min-width: 0; /* Permite que se reduzca adecuadamente sin romper la alineación */
-    overflow: hidden; /* Evita que el contenido del menú desborde */
+	flex-grow: 1;
+    justify-content: flex-start;
+    min-width: 0;
+    overflow: hidden;
 	transition: gap 0.3s ease;
 }
 .rounded-button1 {
-    border-radius: 12px; /* Bordes redondeados */
-    background-color: #005bff; /* Color del botón */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cursor de mano */
+    border-radius: 12px;
+    background-color: #005bff;
+    color: white;
+    border: none;
+    cursor: pointer;
 	white-space: nowrap;
     border-top-width: 10px;
     padding-top: 10px;
@@ -282,11 +282,11 @@ font-weight: bold;
 
 }
 .rounded-button {
-    border-radius: 12px; /* Bordes redondeados */
-    background-color: #0f0d13; /* Color del botón */
-    color: white; /* Color del texto */
-    border: 1px solid #555257; /* Borde en todos los lados */
-    cursor: pointer; /* Cursor de mano */
+    border-radius: 12px;
+    background-color: #0f0d13;
+    color: white;
+    border: 1px solid #555257;
+    cursor: pointer;
     white-space: nowrap;
     padding-top: 10px;
     padding-bottom: 9px;

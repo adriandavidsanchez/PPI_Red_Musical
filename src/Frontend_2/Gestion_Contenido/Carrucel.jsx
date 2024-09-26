@@ -24,7 +24,7 @@ const GenresCarousel = () => {
   return (
     <div className="genres-section12" style={{ marginLeft: '250px',marginRight: '250px'}}>
       <h2 className="mb-4">Genres</h2>
-      <Carousel>
+      <Carousel interval={2000}>
         {genreChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
             <div className="d-flex justify-content-around align-items-center" style={{height: '140px'}}>
