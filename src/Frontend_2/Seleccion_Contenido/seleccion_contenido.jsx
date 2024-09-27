@@ -1,7 +1,7 @@
 import React from 'react';
 import AudioPlayer from '../AudioPlayer';
+import Opcion_Cantautor from './Opcion_Catautor';
 import './seleccion_contenido.css';
-
 const RedesignedComponent = () => {
 return (
 <div>
@@ -9,8 +9,11 @@ return (
         <header>
         <div className="logo-container12">
             <img className='isotipo12' src="src/assets/imagenes/isotipo1.svg" alt="Isotipo" />
-            <h1 style={{ alignItems: 'center' }} className="logo12">Bad Melody - Rock</h1> 
+            <h1 style={{ alignItems: 'center' }} className="logo12">Bad Melody - Rock</h1>
+            <div className="overlay">
+                <Opcion_Cantautor/>
             </div>
+        </div>
         </header>
 
         <div className="main-content">

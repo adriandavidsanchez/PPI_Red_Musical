@@ -1,0 +1,154 @@
+.music-menu {
+    padding: 1rem;
+}
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border-radius: 7px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 165px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    right: 0px;
+}
+.dropdown-trigger:hover{
+    background-color: #f3f3f3;
+}
+.dropdown-content button:hover {
+    background-color: #f3f3f3;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+}
+
+.icon {
+    margin-right: 0.5rem;
+}
+
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    padding-right: 52px;
+    border: 1px solid #ccc;
+    padding-top: 16px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    border-radius: 12px;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+.form-group select{
+    width: 103.7%;
+}
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.submit-button,
+.delete-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+button{
+    border-radius: 5px;
+    background-color: white;
+    border:1px solid #ccc;
+    cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+    background-color: #ffffff; /* Cambia el color de fondo del botón */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.close-button{
+    margin-left: 345px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 34px;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+}
+.top{
+    display: flex;
+}

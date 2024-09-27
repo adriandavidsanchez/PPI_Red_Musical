@@ -23,7 +23,6 @@ body {
     margin-left: 30px;
 }
 header {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -32,6 +31,16 @@ header {
     display: flex;
     align-items: center;
     margin-left: 30px;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    right: 0; /* Posiciona el div en el lado derecho */
+    top: 0; /* Posiciona el div en la parte superior */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para que se vea el contenido debajo */
+    padding: 10px;
+    z-index: 1; /* Asegura que el div esté por encima de otros elementos */
 }
 .isotipo12 {
     width: 75px;

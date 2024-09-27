@@ -44,6 +44,19 @@ if (SELECTED_COMPONENT === 1) {
       </React.StrictMode>
     );
   });
+
+} else if (SELECTED_COMPONENT === 5) {
+  import('./Frontend_2/Seleccion_Contenido/Opcion_Catautor').then(module => {
+    const Opcion_Cantautor = module.default;
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <Opcion_Cantautor />
+      </React.StrictMode>
+    );
+  });
+
+
 } else {
   console.error('Componente no seleccionado. Por favor, elige un valor entre 1 y 4.');
 }
