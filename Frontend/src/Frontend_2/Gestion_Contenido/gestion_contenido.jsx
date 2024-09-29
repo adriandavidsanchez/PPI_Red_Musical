@@ -1,53 +1,60 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import GenresCarousel from './Carrucel';
-import './gestion_contenido.css';
+import styles from './gestion_contenido.module.css'; // Asegúrate de que el nombre del archivo sea correcto
 
 export default function Component12() {
+
+  useEffect(() => {
+    // Aplica los estilos al montar el componente
+    document.body.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif';
+    document.body.style.padding = '0px';
+    // Limpia los estilos al desmontar el componente
+  }, []);
     return (
-      <div className="container12">
-        <header className="header12">
-          <div className="logo-container12">
-            <img className='isotipo12' src="src/assets/imagenes/isotipo.svg" alt="Isotipo" />
-            <a style={{ alignItems: 'center' }} className="logo12">Bad Melody</a>
+      <div className={styles['container12']}>
+        <header className={styles['header12']}>
+          <div className={styles['logo-container12']}>
+            <img className={styles['isotipo12']} src="src/assets/imagenes/isotipo.svg" alt="Isotipo" />
+            <a style={{ alignItems: 'center' }} className={styles['logo12']}>Bad Melody</a>
           </div>
-          <nav className="nav12">
+          <nav className={styles['nav12']}>
             <a href="#">Generos</a>
           </nav>
         </header>
 
-        <main className="main12">
-          <section className="featured-section12">
-            <div className="featured-artists12">
-              <div className="artists-grid12">
-                <div className="artist12">
+        <main className={styles['main12']}>
+          <section className={styles['featured-section12']}>
+            <div className={styles['featured-artists12']}>
+              <div className={styles['artists-grid12']}>
+                <div className={styles['artist12']}>
                   <h2 style={{ marginRight: '80px', marginBottom: '30px' }}>Featured Artists</h2>
                   <img src="/src/assets/imagenes/Gestion-prueva/dis2.jpg" alt="Artist Name" />
-                  <h3>Artist Name</h3>
+                  <h3>{/* Aquí puedes poner el nombre del artista */}Artist Name</h3>
                   <p>Genre</p>
                 </div>
-                <div className="artist12" style={{ marginTop: '66px' }}>
+                <div className={styles['artist12']} style={{ marginTop: '66px' }}>
                   <img style={{ paddingLeft: '30px' }} src="/src/assets/imagenes/Gestion-prueva/dis3.jpg" alt="Artist Name" />
-                  <h3>Artist Name</h3>
+                  <h3>{/* Aquí puedes poner el nombre del artista */}Artist Name</h3>
                   <p>Genre</p>
                 </div>
-                <div className="new-releases12">
+                <div className={styles['new-releases12']}>
                   <h2 style={{ marginBottom: '30px' }}>New Releases</h2>
-                  <div className="releases-list12">
-                    <div style={{ display: 'flex', alignItems: 'center',marginBottom: '30px' }}>
+                  <div className={styles['releases-list12']}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '30px' }}>
                       <div>
-                        <img className="Discos12" src="/src/assets/imagenes/Gestion-prueva/dis1.jpg" alt="Album Name" />
+                        <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis1.jpg" alt="Album Name" />
                       </div>
-                      <div className="release12" style={{marginLeft: '20px'}}>
+                      <div className={styles['release12']} style={{ marginLeft: '20px' }}>
                         <h3>Album Name</h3>
                         <p>Artist Name - Genre</p>
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <div>
-                        <img className="Discos12" src="/src/assets/imagenes/Gestion-prueva/dis4.jpg" alt="Album Name" />
+                        <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis4.jpg" alt="Album Name" />
                       </div>
-                      <div className="release12"  style={{marginLeft: '20px'}}>
+                      <div className={styles['release12']} style={{ marginLeft: '20px' }}>
                         <h3>Album Name</h3>
                         <p>Artist Name - Genre</p>
                       </div>
@@ -58,12 +65,12 @@ export default function Component12() {
             </div>
           </section>
         </main>
-        <section className="genres-section12">
+        <section className={styles['genres-section12']}>
           <GenresCarousel />
         </section>
-        <footer className="footer12">
+        <footer className={styles['footer12']}>
           <span>🎶 Music Platform</span>
-          <nav className="footer-nav12">
+          <nav className={styles['footer-nav12']}>
             <a href="#">Contact</a>
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
