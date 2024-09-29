@@ -1,7 +1,6 @@
 package com.bad.melody.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bad.melody.model.Usuario;
@@ -14,34 +13,35 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
-    public Usuario ObtenerUsarioPorId(Long id) {
+    public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Usuario inicisiarSecionUsuario(String email, String contrasenia) {
+    public Usuario iniciarSesionUsuario(String email, String contrasenia) {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        if (usuario == null || !passwordEncoder.matches(usuario.getEmail(), contrasenia)) {
+        // Compara la contraseña directamente
+        if (usuario == null || !usuario.getContrasenia().equals(contrasenia)) {
             throw new RuntimeException("Correo electrónico o contraseña incorrectos");
         }
         return usuario;
     }
 
-    @Override
     public Usuario crearUsuario(Usuario usuario) {
-        //verificar si el correo ya esta registrado
-        if(usuarioRepository.findByEmail(usuario.getEmail()) != null){
-            throw new RuntimeException("El correo electrónico ya está registrado");
+        if (usuario.getContacto() == null) {
+            throw new RuntimeException("El campo 'contacto' no puede ser null");
         }
-        //codificar la catrasenia antes de guardar el usuario
-        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
+    
+        // Verificar si el contacto ya está registrado
+        if (usuarioRepository.findById(usuario.getContacto()).isPresent()) {
+            throw new RuntimeException("El contacto ya está registrado");
+        }
+    
         return usuarioRepository.save(usuario);
     }
-
+    
+    
     @Override
     public Usuario actualizarUsuario(Long id, Usuario actualizarUsuario) {
         Usuario usuarioBBDD = usuarioRepository.findById(id).orElse(null);
@@ -54,12 +54,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean eliminarUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            return false; // Retorna false si el usuario no existe
+        }
         try {
             usuarioRepository.deleteById(id);
-            return true;
+            return true; // Retorna true si se eliminó correctamente
         } catch (Exception e) {
-            return false;
+            return false; // Retorna false si ocurrió un error
         }
     }
+    
 
 }
+

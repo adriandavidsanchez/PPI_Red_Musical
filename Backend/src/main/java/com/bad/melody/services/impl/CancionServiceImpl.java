@@ -72,8 +72,13 @@ public class CancionServiceImpl implements CancionService {
      *Para eliminar el cancion en la base de datos por medio del id
      */
     @Override
-    public void eliminarCancion(Long id) {
-        cancionRepository.deleteById(id);
+    public boolean eliminarCancion(Long id) {
+        try {
+            cancionRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     

@@ -16,6 +16,6 @@ public interface CancionService {
 
     Long contarCanciones ();
 
-    void eliminarCancion (Long id);
+    boolean eliminarCancion (Long id);
 
 }

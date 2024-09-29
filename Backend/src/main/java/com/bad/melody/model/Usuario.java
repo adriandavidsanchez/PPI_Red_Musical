@@ -28,7 +28,7 @@ public class Usuario {
     private String nombre;
 
     @Id
-    @Column(name = "contacto", nullable = false)
+    @Column(name = "contacto", nullable = false, unique = true)
     private Long contacto;
 
     @Email
@@ -51,6 +51,6 @@ public class Usuario {
     private LocalDateTime fechaCreacionUsuario = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "id_UsuarioGenero")
+    @JoinColumn(name = "id_Usuario_Genero")
     private Genero genero;
 }
