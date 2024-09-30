@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './inicio1.module.css';
+
 
 const UserForm = ({ onClose, formType }) => {
     const [username, setUsername] = useState('');
@@ -13,10 +15,16 @@ const UserForm = ({ onClose, formType }) => {
     const [NewCataut, setNewCataut] = useState({ name: "", contact: "", email: "", password: "", rol: "", genre: "" });
     const [sign_in, setsign_in] = useState({ name: "", password: "" });
 
+    const navigate = useNavigate();
     const CreateCataut = async () => {
         try {
             const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: rol, genero: { id: 1 } };
-            await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
+            const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
+            if (response.status === 201) {
+                // Redirige a /contenido si el registro es exitoso
+                console.log(response.status);
+                navigate('/contenido');
+            }
         } catch (error) {
             console.error('Error al crear el usuario:', error.response?.data || error.message);
         }
@@ -26,6 +34,10 @@ const UserForm = ({ onClose, formType }) => {
         try {
             const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: rol, genero: null };
             await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
+            if (NewCataut.status === 201) {
+                // Redirige a /contenido si el registro es exitoso
+                navigate('/contenido');
+            }
         } catch (error) {
             console.error('Error al crear el usuario:', error.response?.data || error.message);
         }

@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import styles from './Carrucel.module.css'; // Asegúrate de que el nombre del archivo sea correcto
+
 // Lista de géneros
 const genres = [
   'Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica',
@@ -21,15 +22,27 @@ const GenresCarousel = () => {
   // Divide los géneros en bloques de 5
   const genreChunks = chunkArray(genres, 5);
 
+  // Función que se ejecuta al hacer clic en una tarjeta
+  const handleCardClick = (genre) => {
+    console.log(`Clicked on: ${genre}`);
+    
+    // Por ejemplo: window.location.href = `/genres/${genre.toLowerCase()}`;
+  };
+
   return (
     <div className={styles['genres-section12']} style={{ marginLeft: '250px', marginRight: '250px' }}>
       <h2 className="mb-4">Genres</h2>
-      <Carousel interval={2000}>
+      <Carousel interval={5000}>
         {genreChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
             <div className={`d-flex justify-content-around align-items-center`} style={{ height: '140px' }}>
               {chunk.map((genre, genreIndex) => (
-                <Card key={genreIndex} className={`${styles['genre-card12']} p-2`} style={{ width: '260px', height: '120px' }}>
+                <Card
+                  key={genreIndex}
+                  className={`${styles['genre-card12']} p-2`}
+                  style={{ width: '260px', height: '120px', cursor: 'pointer' }}
+                  onClick={() => handleCardClick(genre)} // Añade el evento onClick
+                >
                   <Card.Body className={`d-flex justify-content-center align-items-center`}>
                     <div className={styles['icon-text-container44']}>
                       <svg data-id="35" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="black"
@@ -46,15 +59,16 @@ const GenresCarousel = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-{/* Estilos adicionales en línea */}
-<style>
+
+      {/* Estilos adicionales en línea */}
+      <style>
         {`
           .carousel-control-prev {
-            left: -100px;
+            left: -30px;
             transform: translateX(-100%);
           }
           .carousel-control-next {
-            right: -100px;
+            right: -30px;
             transform: translateX(100%);
           }
           .carousel-indicators {

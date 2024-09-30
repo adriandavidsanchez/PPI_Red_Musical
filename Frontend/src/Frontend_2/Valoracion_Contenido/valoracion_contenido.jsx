@@ -1,7 +1,19 @@
 import React from 'react';
 import styles from './valoracion_contenido.module.css'; // Asegúrate de usar un archivo de módulo CSS
 
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+`;
+
 function Valoracion() {
+
     return (
         <div className={styles['container']}>
             <div className={styles['video-container']}>
@@ -61,7 +73,7 @@ function Valoracion() {
                     <label>Comment
                         <textarea placeholder="Comparte tus pensamientos..." rows="3"></textarea>
                     </label>
-                    <button type="submit">Submit Review</button>
+                    <StyledButton  type="submit">Submit Review</StyledButton >
                 </form>
             </div>
         </div>

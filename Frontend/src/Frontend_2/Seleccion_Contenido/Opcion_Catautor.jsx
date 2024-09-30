@@ -11,6 +11,7 @@ export default function Opcion_Cantautor() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // Aquí iría la lógica para manejar la subida de la canción
         console.log("Canción subida");
         setIsAddDialogOpen(false);
     };
@@ -26,7 +27,10 @@ export default function Opcion_Cantautor() {
     };
 
     const handleSelectSong = (song) => {
-        setSelectedSongs((prevSelected) => prevSelected.includes(song)? prevSelected.filter((s) => s !== song): [...prevSelected, song]
+        setSelectedSongs((prevSelected) =>
+            prevSelected.includes(song)
+                ? prevSelected.filter((s) => s !== song)
+                : [...prevSelected, song]
         );
     };
 
@@ -56,7 +60,37 @@ export default function Opcion_Cantautor() {
                             <button className={styles['close-button']} onClick={() => setIsAddDialogOpen(false)}>×</button>
                         </div>
                         <form onSubmit={handleSubmit}>
-                            {/* Form fields remain the same */}
+                            <div className={styles['form-group']}>
+                                <label htmlFor="title">Título de la canción</label>
+                                <input id="title" type="text" required />
+                            </div>
+                            <div className={styles['form-group']}>
+                                <label htmlFor="description">Descripción de la canción</label>
+                                <textarea id="description"></textarea>
+                            </div>
+                            <div className={styles['form-group']}>
+                                <label htmlFor="audio">Audio de la canción</label>
+                                <input id="audio" type="file" accept="audio/*" required />
+                            </div>
+                            <div className={styles['form-group']}>
+                                <label htmlFor="image">Imagen de la canción</label>
+                                <input id="image" type="file" accept="image/*" required />
+                            </div>
+                            <div className={styles['form-group']}>
+                                <label htmlFor="video">Video de la canción (opcional)</label>
+                                <input id="video" type="file" accept="video/*" />
+                            </div>
+                            <div className={styles['form-group']}>
+                                <label htmlFor="genre">Género musical</label>
+                                <select id="genre">
+                                    <option value="">Selecciona un género</option>
+                                    <option value="pop">Pop</option>
+                                    <option value="rock">Rock</option>
+                                    <option value="jazz">Jazz</option>
+                                    <option value="classical">Clásica</option>
+                                    <option value="electronic">Electrónica</option>
+                                </select>
+                            </div>
                             <button type="submit" className={styles['submit-button']}>Subir Canción</button>
                         </form>
                     </div>
@@ -72,14 +106,25 @@ export default function Opcion_Cantautor() {
                             {songs.map((song, index) => (
                                 <li key={index}>
                                     <label>
-                                        <input type="checkbox" checked={selectedSongs.includes(song)} onChange={() => handleSelectSong(song)}/>{song}
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedSongs.includes(song)}
+                                            onChange={() => handleSelectSong(song)}
+                                        />
+                                        {song}
                                     </label>
                                 </li>
                             ))}
                         </ul>
                         <div className={styles['button-group']}>
                             <button onClick={() => {setIsDeleteDialogOpen(false); setSelectedSongs([]);}}>Cancelar</button>
-                            <button onClick={handleDelete} className={styles['delete-button']} disabled={selectedSongs.length === 0}>Eliminar ({selectedSongs.length})</button>
+                            <button 
+                                onClick={handleDelete} 
+                                className={styles['delete-button']}
+                                disabled={selectedSongs.length === 0}
+                            >
+                                Eliminar ({selectedSongs.length})
+                            </button>
                         </div>
                     </div>
                 </div>

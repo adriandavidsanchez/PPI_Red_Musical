@@ -5,11 +5,11 @@
   max-width: 100%;
 }
 .carousel-control-prev {
-  left: -100px;
+  left: -30px;
   transform: translateX(-100%);
 }
 .carousel-control-next {
-  right: -100px;
+  right: -30px;
   transform: translateX(100%);
 }
 

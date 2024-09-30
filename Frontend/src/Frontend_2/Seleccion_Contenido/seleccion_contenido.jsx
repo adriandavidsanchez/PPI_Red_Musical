@@ -1,32 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 import AudioPlayer from '../AudioPlayer';
 import Opcion_Cantautor from './Opcion_Catautor';
 
 import styles from './seleccion_contenido.module.css'; // Asegúrate de que el nombre del archivo sea correcto
 
-
-
 // Estilo para el hea
 
 const RedesignedComponent = () => {
-
-    useEffect(() => {
-        // Estilos del body
-        document.body.style.fontFamily = "'Inter', sans-serif";
-        document.body.style.margin = '0';
-        document.body.style.padding = '20px';
-        document.body.style.boxSizing = 'border-box';
-
-
-        // Limpia los estilos al desmontar el componente
-        return () => {
-            document.body.style.fontFamily = "";
-            document.body.style.margin = '';
-            document.body.style.padding = '0px';
-            document.body.style.boxSizing = '';
-    
-        };
-    }, []); // Solo ejecuta una vez después del montaje del componente
 
     return (
 

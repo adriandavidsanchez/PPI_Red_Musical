@@ -140,7 +140,7 @@ input[type="file"]::file-selector-button {
     cursor: pointer;
 }
 .close-button{
-    margin-left: 345px;
+    margin-left: 230px;
     border-radius: 5px;
     background-color: white;
     border: none;
