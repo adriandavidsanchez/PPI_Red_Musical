@@ -15,4 +15,6 @@ public interface UsuarioService {
     boolean eliminarUsuario(Long id);
 
     Usuario actualizarUsuario(Long id, Usuario actualizarUsuario);
+
+    Long getLastInsertedId();
 }

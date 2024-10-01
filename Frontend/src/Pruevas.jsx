@@ -12,10 +12,10 @@ const FileUploadForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
-        formData.append('audio', selectedFile);  // Añade el archivo seleccionado al FormData
+        formData.append('video', selectedFile);  // Añade el archivo seleccionado al FormData
 
         try {
-            const response = await axios.post('http://localhost:8080/upload', formData, {
+            const response = await axios.post('http://localhost:8080/uploadimg', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -23,13 +23,13 @@ const FileUploadForm = () => {
 
             if (response.status === 200) {
                 console.log(response.data);  // Mensaje de éxito del backend
-                alert('Archivo subido correctamenteAAA');
+                alert('Archivo subido correctamente');
             } else {
-                console.error('Error al subir el archivo.OOO');
+                console.error('Error al subir el archivo.');
                 alert('Error al subir el archivo.');
             }
         } catch (error) {
-            console.error('Error al subir el archivo:IIII', error);
+            console.error('Error al subir el archivo:', error);
             alert('Error al subir el archivo.');
         }
     };
@@ -37,8 +37,8 @@ const FileUploadForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="audio">Audio de la canción</label>
-                <input id="audio" type="file" accept="audio/*" onChange={handleFileChange} required />
+                <label htmlFor="video">Audio de la canción</label>
+                <input id="video" type="file" accept="video/*" onChange={handleFileChange} required />
             </div>
             <button type="submit">Subir</button>
         </form>

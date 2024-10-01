@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,17 +29,17 @@ public class Cancion {
     @Column(name = "titulo", nullable = false)
     private String tituloCancion;
 
-    @Lob
-    @Column(nullable = false)
-    private byte[] subirCancion;
+    
+    @Column(name = "AudioCancion")
+    private String AudioCancion;
 
-    @Lob
+    
     @Column(name = "videoCancion")
-    private byte[] subirVideo;
+    private String videoCancion;
 
-    @Lob
+    
     @Column(name = "imagenCancion", nullable = false)
-    private byte[] imagenCancion;
+    private String imagenCancion;
 
     @Column(name = "fechaSubidaCancion", nullable = false, updatable = false)
     private LocalDate fechaSubidaCancion = LocalDate.now();

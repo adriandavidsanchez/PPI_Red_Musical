@@ -17,7 +17,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
-
+    
+    @Override
+    public Long getLastInsertedId() {
+        // Método que devuelve el ID del último usuario insertado
+        return usuarioRepository.findLastInsertedId();
+    }
+    
     @Override
     public Usuario iniciarSesionUsuario(String email, String contrasenia) {
         Usuario usuario = usuarioRepository.findByEmail(email);

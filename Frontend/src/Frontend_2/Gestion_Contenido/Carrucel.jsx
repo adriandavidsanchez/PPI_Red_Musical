@@ -1,7 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import styles from './Carrucel.module.css'; // Asegúrate de que el nombre del archivo sea correcto
+
 
 // Lista de géneros
 const genres = [
@@ -19,12 +21,14 @@ const chunkArray = (array, size) => {
 };
 
 const GenresCarousel = () => {
+  const navigate = useNavigate();
   // Divide los géneros en bloques de 5
   const genreChunks = chunkArray(genres, 5);
 
   // Función que se ejecuta al hacer clic en una tarjeta
   const handleCardClick = (genre) => {
     console.log(`Clicked on: ${genre}`);
+    navigate('/detalle');
     
     // Por ejemplo: window.location.href = `/genres/${genre.toLowerCase()}`;
   };
@@ -42,6 +46,7 @@ const GenresCarousel = () => {
                   className={`${styles['genre-card12']} p-2`}
                   style={{ width: '260px', height: '120px', cursor: 'pointer' }}
                   onClick={() => handleCardClick(genre)} // Añade el evento onClick
+                  
                 >
                   <Card.Body className={`d-flex justify-content-center align-items-center`}>
                     <div className={styles['icon-text-container44']}>

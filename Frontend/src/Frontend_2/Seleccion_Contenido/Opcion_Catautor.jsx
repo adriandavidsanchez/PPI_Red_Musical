@@ -33,6 +33,39 @@ export default function Opcion_Cantautor() {
                 : [...prevSelected, song]
         );
     };
+    
+    const [tituloCancion, setTituloCancion] = useState('');
+    const [descriptionC, setdescriptionC] = useState('');
+    const [audioCancion, setAudioCancion] = useState('');
+    const [videoCancion, setVideoCancion] = useState('');
+    const [imagenCancion, setImagenCancion] = useState('');
+    const [artistaId, setArtistaId] = useState(1);  // Suponiendo que tienes el ID del artista disponible
+    const [generoId, setGeneroId] = useState(1);  // Suponiendo que tienes el ID del género disponible
+
+    const registrarCancion = async () => {
+        try {
+            // Preparar los datos de la canción
+            const nuevaCancion = {
+                tituloCancion: tituloCancion,
+                imagenCancion: imagenCancion?.name,
+                videoCancion: videoCancion?.name || null,
+                AudioCancion: audioCancion?.name || null,  // Campo requerido
+                ArtistaCancion: { id: artistaId },
+                cancion: { id: generoId },  // El ID del género de la canción
+            };
+
+            // Realizar la solicitud POST
+            const response = await axios.post('http://localhost:8080/api/canciones/registrar', nuevaCancion, {
+                withCredentials: true,
+            });
+
+            if (response.status === 201) {
+                console.log('Canción registrada exitosamente:', response.data);
+            }
+        } catch (error) {
+            console.error('Error al registrar la canción:', error.response?.data || error.message);
+        }
+    };
 
     return (
         <div className={styles['music-menu']}>
@@ -51,7 +84,7 @@ export default function Opcion_Cantautor() {
                     </div>
                 )}
             </div>
-    
+
             {isAddDialogOpen && (
                 <div className={styles['dialog']}>
                     <div className={styles['dialog-content']}>
@@ -62,41 +95,41 @@ export default function Opcion_Cantautor() {
                         <form onSubmit={handleSubmit}>
                             <div className={styles['form-group']}>
                                 <label htmlFor="title">Título de la canción</label>
-                                <input id="title" type="text" required />
+                                <input id="title" type="text" required onChange={(e) => setTituloCancion(e.target.value)} />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="description">Descripción de la canción</label>
-                                <textarea id="description"></textarea>
+                                <textarea id="description" onChange={(e) => setdescriptionC(e.target.value)}></textarea>
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="audio">Audio de la canción</label>
-                                <input id="audio" type="file" accept="audio/*" required />
+                                <input id="audio" type="file" accept="audio/*" onChange={(e) => setUsername(e.target.value)} required />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="image">Imagen de la canción</label>
-                                <input id="image" type="file" accept="image/*" required />
+                                <input id="image" type="file" accept="image/*" onChange={(e) => setUsername(e.target.value)} required />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="video">Video de la canción (opcional)</label>
-                                <input id="video" type="file" accept="video/*" />
+                                <input id="video" type="file" accept="video/*" onChange={(e) => setUsername(e.target.value)} />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="genre">Género musical</label>
-                                <select id="genre">
+                                <select id="genre" onChange={(e) => setGeneroId(e.target.selectedIndex)}>
                                     <option value="">Selecciona un género</option>
-                                    <option value="pop">Pop</option>
-                                    <option value="rock">Rock</option>
-                                    <option value="jazz">Jazz</option>
-                                    <option value="classical">Clásica</option>
-                                    <option value="electronic">Electrónica</option>
+                                    <option value="1">Pop</option>
+                                    <option value="2">Rock</option>
+                                    <option value="3">Jazz</option>
+                                    <option value="4">Clásica</option>
+                                    <option value="5">Electrónica</option>
                                 </select>
                             </div>
-                            <button type="submit" className={styles['submit-button']}>Subir Canción</button>
+                            <button onClick={registrarCancion} type="submit" className={styles['submit-button']}>Subir Canción</button>
                         </form>
                     </div>
                 </div>
             )}
-    
+
             {isDeleteDialogOpen && (
                 <div className={styles['dialog']}>
                     <div className={styles['dialog-content']}>
@@ -117,9 +150,9 @@ export default function Opcion_Cantautor() {
                             ))}
                         </ul>
                         <div className={styles['button-group']}>
-                            <button onClick={() => {setIsDeleteDialogOpen(false); setSelectedSongs([]);}}>Cancelar</button>
-                            <button 
-                                onClick={handleDelete} 
+                            <button onClick={() => { setIsDeleteDialogOpen(false); setSelectedSongs([]); }}>Cancelar</button>
+                            <button
+                                onClick={handleDelete}
                                 className={styles['delete-button']}
                                 disabled={selectedSongs.length === 0}
                             >

@@ -6,7 +6,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -43,9 +42,8 @@ public class Usuario {
     @Column(name = "rol")
     private String rol;
 
-    @Lob
     @Column(name =  "imagenUsuario")
-    private byte[] imagenUsuario;
+    private String imagenUsuario;
 
     @Column(name = "fechaSubidaCancion", nullable = false, updatable = false)
     private LocalDateTime fechaCreacionUsuario = LocalDateTime.now();
