@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FileUpload from '../../FileUpload';
 import styles from './inicio1.module.css';
-
 
 const UserForm = ({ onClose, formType }) => {
     const [username, setUsername] = useState('');
@@ -22,16 +22,15 @@ const UserForm = ({ onClose, formType }) => {
 
     // Maneja el cambio de archivo seleccionado
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);  // Almacena el archivo seleccionado en el estado
         const file = event.target.files[0];
-        setFileName(file.name);
+        setSelectedFile(file);
+        setFileName(file ? file.name : '');
     };
 
     const CreateCataut = async () => {
-        const formData = new FormData();
-        formData.append('image', selectedFile);  // Añade el archivo seleccionado al FormData
 
-        
+        FileUpload({ folderName: 'Audio', file: selectedFile });
+
         try {
             const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: "cantautor",imagenUsuario:fileName, genero:  { id: genreIndex } };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
@@ -43,7 +42,7 @@ const UserForm = ({ onClose, formType }) => {
         } catch (error) {
             console.error('Error al crear el usuario:', error.response?.data || error.message);
         }
-
+        /*
         try {
             const response = await axios.post('http://localhost:8080/uploadimg', formData, {
                 headers: {
@@ -58,10 +57,12 @@ const UserForm = ({ onClose, formType }) => {
                 console.error('Error al subir el archivo.');
                 alert('Error al subir el archivo.');
             }
+                
         } catch (error) {
             console.error('Error al subir el archivo:', error);
             alert('Error al subir el archivo.');
         }
+            */
     };
     
     const CreateUser = async () => {

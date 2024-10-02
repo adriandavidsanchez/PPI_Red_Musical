@@ -10,7 +10,7 @@ public interface CancionService {
 
     Cancion obtenerCancionPorId (Long id);
 
-    Cancion guardarCancion (Cancion CancionNueva);
+    Cancion ingresarCancionNueva (Cancion CancionNueva);
 
     Cancion actualizarCancion (Long id, Cancion CancionActualizar);
 

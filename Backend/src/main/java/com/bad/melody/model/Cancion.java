@@ -29,15 +29,12 @@ public class Cancion {
     @Column(name = "titulo", nullable = false)
     private String tituloCancion;
 
-    
     @Column(name = "AudioCancion")
-    private String AudioCancion;
+    private String audioCancion;
 
-    
     @Column(name = "videoCancion")
     private String videoCancion;
 
-    
     @Column(name = "imagenCancion", nullable = false)
     private String imagenCancion;
 
@@ -45,10 +42,10 @@ public class Cancion {
     private LocalDate fechaSubidaCancion = LocalDate.now();
 
     @ManyToOne
-    @JoinColumn(name = "id_ArtistaCancion", nullable = false)
-    private Usuario ArtistaCancion;
+    @JoinColumn(name = "contacto_usuario", nullable = false)
+    private Usuario artistaCancion;
 
     @ManyToOne
-    @JoinColumn(name = "id_GeneroCancion")
-    private Cancion cancion;
+    @JoinColumn(name = "id_GeneroCancion", nullable = false)
+    private Genero generoCancion;
 }

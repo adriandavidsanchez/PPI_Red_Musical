@@ -53,7 +53,6 @@ public class CancionServiceImpl implements CancionService {
         Cancion cancionBBDD = cancionRepository.findById(id).orElse(CancionActualizar);
         if(cancionBBDD != null){
             cancionBBDD.setTituloCancion(CancionActualizar.getTituloCancion());
-            cancionBBDD.setCancion(CancionActualizar.getCancion());
             return cancionRepository.save(cancionBBDD);
         }
         return null;
