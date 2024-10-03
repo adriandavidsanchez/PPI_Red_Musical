@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.bad.melody.model.Genero;
 
+
+
 @Repository
 public interface GeneroRepository  extends JpaRepository <Genero,Long>{
 

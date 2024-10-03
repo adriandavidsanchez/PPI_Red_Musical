@@ -68,9 +68,10 @@ const UserForm = ({ onClose, formType }) => {
     const CreateUser = async () => {
         try {
             const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: rol, genero: null };
-            await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
-            if (NewCataut.status === 201) {
+            const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
+            if (response.status === 201) {
                 // Redirige a /contenido si el registro es exitoso
+                console.log(response.status);
                 navigate('/contenido');
             }
         } catch (error) {
@@ -86,7 +87,7 @@ const UserForm = ({ onClose, formType }) => {
         })
         .catch(error => {
             alert('Error al iniciar sesión: Credenciales invalida');
-        }); 
+        });
     };
 
     const toggleForm = (e, type) => {
@@ -114,7 +115,6 @@ const UserForm = ({ onClose, formType }) => {
                 setContact(numericValue);
                 CreateUser();
             } else {
-                console.log(genreIndex);
                 CreateCataut();
             }
         }

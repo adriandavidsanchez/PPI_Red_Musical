@@ -46,6 +46,8 @@ public class Cancion {
     private Usuario artistaCancion;
 
     @ManyToOne
-    @JoinColumn(name = "id_GeneroCancion", nullable = false)
+    @JoinColumn(name = "id_genero_cancion", nullable = false)
     private Genero generoCancion;
+    
+    
 }
