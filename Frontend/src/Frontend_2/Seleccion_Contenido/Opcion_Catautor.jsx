@@ -39,19 +39,19 @@ export default function Opcion_Cantautor() {
     const [audioCancion, setAudioCancion] = useState('');
     const [videoCancion, setVideoCancion] = useState('');
     const [imagenCancion, setImagenCancion] = useState('');
-    const [artistaId, setArtistaId] = useState(1);  // Suponiendo que tienes el ID del artista disponible
-    const [generoId, setGeneroId] = useState(1);  // Suponiendo que tienes el ID del género disponible
+    const [artistaId, setArtistaId] = useState(1);
+    const [generoId, setGeneroId] = useState(1);
 
     const registrarCancion = async () => {
         try {
             // Preparar los datos de la canción
             const nuevaCancion = {
                 tituloCancion: tituloCancion,
-                imagenCancion: imagenCancion?.name,
-                videoCancion: videoCancion?.name || null,
                 AudioCancion: audioCancion?.name || null,  // Campo requerido
-                ArtistaCancion: { id: artistaId },
-                cancion: { id: generoId },  // El ID del género de la canción
+                videoCancion: videoCancion?.name || null,
+                imagenCancion: imagenCancion?.name,
+                ArtistaCancion: { contacto: artistaId },
+                generoCancion: { id: generoId },  // El ID del género de la canción
             };
 
             // Realizar la solicitud POST
@@ -99,7 +99,7 @@ export default function Opcion_Cantautor() {
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="description">Descripción de la canción</label>
-                                <textarea id="description" onChange={(e) => setdescriptionC(e.target.value)}></textarea>
+                                <textarea required id="description" onChange={(e) => setdescriptionC(e.target.value)}></textarea>
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="audio">Audio de la canción</label>
@@ -115,7 +115,7 @@ export default function Opcion_Cantautor() {
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="genre">Género musical</label>
-                                <select id="genre" onChange={(e) => setGeneroId(e.target.selectedIndex)}>
+                                <select required id="genre" onChange={(e) => setGeneroId(e.target.selectedIndex)}>
                                     <option value="">Selecciona un género</option>
                                     <option value="1">Pop</option>
                                     <option value="2">Rock</option>

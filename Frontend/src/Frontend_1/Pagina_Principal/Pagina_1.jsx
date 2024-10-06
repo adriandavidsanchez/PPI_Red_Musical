@@ -11,8 +11,17 @@ function Pagina_1() {
     setShowForm(true);
   }
   useEffect(() => {
+    // Selecciona todos los elementos <a> en el documento
+const links = document.querySelectorAll('a');
+
+// Recorre cada enlace y cambia su color a negro
+links.forEach(link => {
+  link.style.color = 'white';
+});
+
     // Aplica los estilos al montar el componente
     document.body.style.backgroundColor = '#0f0d13';
+    document.body.style.margin = '0';
     document.body.style.margin = '0';
     document.body.style.padding = '0';
     document.body.style.fontFamily = 'Arial, sans-serif';

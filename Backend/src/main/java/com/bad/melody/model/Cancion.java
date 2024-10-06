@@ -32,6 +32,9 @@ public class Cancion {
     @Column(name = "AudioCancion")
     private String audioCancion;
 
+    @Column(name = "Descripcion")
+    private String Description;
+
     @Column(name = "videoCancion")
     private String videoCancion;
 
@@ -48,6 +51,4 @@ public class Cancion {
     @ManyToOne
     @JoinColumn(name = "id_genero_cancion", nullable = false)
     private Genero generoCancion;
-    
-    
 }

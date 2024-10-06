@@ -5,34 +5,47 @@ import FileUpload from '../../FileUpload';
 import styles from './inicio1.module.css';
 
 const UserForm = ({ onClose, formType }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    // Estados del formulario //
+    const [nombreUsuario, setnombreUsuario] = useState('');
+    const [contrasena, setcontrasena] = useState('');
     const [email, setEmail] = useState('');
-    const [genre, setGenre] = useState('');
-    const [contact, setContact] = useState('');
-    const [Cataut, setCataut] = useState(false);
-    const [rol, setRol] = useState('Usuario');
-    const [NewCataut, setNewCataut] = useState({ name: "", contact: "", email: "", password: "", rol: "", genre: "" });
-    const [sign_in, setsign_in] = useState({ name: "", password: "" });
+    const [genero, setGenero] = useState('');
+    const [contacto, setContacto] = useState('');
+    const [esCantautor, setEsCantautor] = useState(false);
+    const [indiceGenero, setIndiceGenero] = useState(null);
+    const [nombreArchivo, setNombreArchivo] = useState('');  // Estado para el nombre del archivo
+    const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
+
     const navigate = useNavigate();
-    const [genreIndex, setGenreIndex] = useState(null);
-    const [fileName, setFileName] = useState('');  // Estado para el nombre del archivo
-    const [selectedFile, setSelectedFile] = useState(null);
+    // Lista de géneros musicales disponibles //
 
+    const generosDisponibles  = ['Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica', 'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica'];
+    
+    // Manejadores de eventos //
 
-    // Maneja el cambio de archivo seleccionado
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-        setFileName(file ? file.name : '');
+    const manejarCambioArchivo  = (event) => {
+        const archivo  = event.target.files[0];
+        setArchivoSeleccionado(archivo );
+        setNombreArchivo(archivo  ? archivo .name : '');
     };
 
-    const CreateCataut = async () => {
+    const manejarCambioGenero  = (e) => {
+        const generoSeleccionado  = e.target.value;
+        setGenero(generoSeleccionado );
+        const indice  = generosDisponibles .indexOf(generoSeleccionado );
+        setIndiceGenero(indice  + 1);
+    };
 
-        FileUpload({ folderName: 'Audio', file: selectedFile });
+    const alternarTipoUsuario = (e, tipo) => {
+        e.preventDefault();
+        setEsCantautor(!tipo);
+    };
 
+    const registrarCantautor  = async () => {
+
+        FileUpload({ folderName: 'Audio', file: archivoSeleccionado });
         try {
-            const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: "cantautor",imagenUsuario:fileName, genero:  { id: genreIndex } };
+            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Cantautor",imagenUsuario:nombreArchivo, genero:  { id: indiceGenero } };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
                 // Redirige a /contenido si el registro es exitoso
@@ -42,36 +55,14 @@ const UserForm = ({ onClose, formType }) => {
         } catch (error) {
             console.error('Error al crear el usuario:', error.response?.data || error.message);
         }
-        /*
-        try {
-            const response = await axios.post('http://localhost:8080/uploadimg', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            if (response.status === 200) {
-                console.log(response.data);  // Mensaje de éxito del backend
-                console.log('Archivo subido correctamente');
-            } else {
-                console.error('Error al subir el archivo.');
-                alert('Error al subir el archivo.');
-            }
-                
-        } catch (error) {
-            console.error('Error al subir el archivo:', error);
-            alert('Error al subir el archivo.');
-        }
-            */
     };
     
-    const CreateUser = async () => {
+    const registrarUsuario  = async () => {
         try {
-            const NewCataut = { nombre: username, contacto: Number(contact), email: email, contrasenia: password, rol: rol, genero: null };
+            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Usuario", genero: null };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
                 // Redirige a /contenido si el registro es exitoso
-                console.log(response.status);
                 navigate('/contenido');
             }
         } catch (error) {
@@ -79,8 +70,8 @@ const UserForm = ({ onClose, formType }) => {
         }
     };
 
-    const Sign_in_user = async () => {
-        await axios.post('http://localhost:8080/api/usuarios/iniciarSesion',  null, {params: {email: email,contrasenia: password}})
+    const iniciarSesion = async () => {
+        await axios.post('http://localhost:8080/api/usuarios/iniciarSesion',  null, {params: {email: email,contrasenia: contrasena}})
         .then(response => {
             console.log('Inicio de sesión exitoso:', response.data);
             navigate('/contenido');
@@ -90,48 +81,32 @@ const UserForm = ({ onClose, formType }) => {
         });
     };
 
-    const toggleForm = (e, type) => {
-        e.preventDefault();
-        setCataut(!type);
-        if (Cataut === true) {
-            setRol("Cantautor");
-        }
-    };
 
-    const handleGenreChange = (e) => {
-        const selectedGenre = e.target.value;
-        setGenre(selectedGenre);
-        const index = genres.indexOf(selectedGenre);
-        setGenreIndex(index + 1);
-    };
 
-    const handleSubmit = (e) => {
+
+    const manejarEnvioFormulario = (e) => {
         e.preventDefault();
         if (formType === 'login') {
-            Sign_in_user();
+            iniciarSesion ();
         } else {
-            if (!Cataut) {
-                const numericValue = Number(contact);
-                setContact(numericValue);
-                CreateUser();
+            if (!esCantautor) {
+                registrarUsuario();
             } else {
-                CreateCataut();
+                registrarCantautor();
             }
         }
-        setUsername('');
+        setnombreUsuario('');
         setEmail('');
-        setGenre('');
-        setPassword('');
-        setContact('');
+        setGenero('');
+        setcontrasena('');
+        setContacto('');
     };
 
-    const handleContactChange = (e) => {
-        const value = e.target.value.replace(/\D/g, '');
-        setContact(value);
-    };
-    const genres = ['Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica', 'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica'];
+
+    
 
     return (
+        
         <div className={styles['container_ini1']}>
             <div className={styles['card_ini1']}>
                 <div className={styles['image-container_ini1']}>
@@ -149,7 +124,7 @@ const UserForm = ({ onClose, formType }) => {
                             ? 'Ingresa tus credenciales para acceder a tu cuenta.'
                             : 'Crea una nueva cuenta para disfrutar de nuestros servicios.'}
                     </p>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={manejarEnvioFormulario}>
                         <div className={styles['input-group_ini1']}>
                             <label htmlFor="username" className={styles['label_ini1']}>Email</label>
                             <input
@@ -170,9 +145,9 @@ const UserForm = ({ onClose, formType }) => {
                                         type="username"
                                         placeholder="Ingresa tu usuario"
                                         className={styles['input_ini1']}
-                                        value={username}
+                                        value={nombreUsuario}
                                         required
-                                        onChange={(e) => setUsername(e.target.value)}
+                                        onChange={(e) => setnombreUsuario(e.target.value)}
                                     />
                                 </div>
                                 <div className={styles['input-group_ini1']}>
@@ -182,16 +157,16 @@ const UserForm = ({ onClose, formType }) => {
                                         type="number"
                                         placeholder="Ingresa tu número de contacto"
                                         className={styles['input_ini1']}
-                                        value={contact}
+                                        value={contacto}
                                         required
-                                        onChange={handleContactChange}
+                                        onChange={(e) => setContacto(e.target.value)}
                                         pattern="[0-9]*"
                                         inputMode="numeric"
                                     />
                                 </div>
                             </>
                         )}
-                        {Cataut && (
+                        {esCantautor && (
                             <div>
                                 <div className={styles['input-group_ini1']}>
                                     <label htmlFor="genre" className={styles['label_ini1']}>Tu Género Musical</label>
@@ -199,19 +174,19 @@ const UserForm = ({ onClose, formType }) => {
                                         id="genre"
                                         className={styles['input_ini1']}
                                         style={{ width: '100%' }}
-                                        value={genre}
+                                        value={genero}
                                         required
-                                        onChange={handleGenreChange}
+                                        onChange={manejarCambioGenero}
                                     >
                                         <option className={styles['tttt']} value="" disabled hidden>Selecciona un género</option>
-                                        {genres.map((g) => (
+                                        {generosDisponibles .map((g) => (
                                             <option required className={styles['tttt']} key={g} value={g}>{g}</option>
                                         ))}
                                     </select>
                                 </div>
                                 <div className={styles['input-group_ini1']}>
                                     <label htmlFor="genre" className={styles['label_ini1']}>Foto de Perfil</label>
-                                    <input className={styles['input_ini1']} id="image" type="file" accept="image/*" onChange={handleFileChange} required />
+                                    <input className={styles['input_ini1']} id="image" type="file" accept="image/*" onChange={manejarCambioArchivo} required />
                                 </div>
                             </div>
                         )}
@@ -224,9 +199,9 @@ const UserForm = ({ onClose, formType }) => {
                                 type="password"
                                 placeholder="Ingresa tu contraseña"
                                 className={styles['input_ini1']}
-                                value={password}
+                                value={contrasena}
                                 required
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setcontrasena(e.target.value)}
                             />
                         </div>
                         <button className={styles['button_ini1']}>
@@ -235,11 +210,11 @@ const UserForm = ({ onClose, formType }) => {
                         {formType === 'register' && (
                             <>
                                 <p className={styles['cat']}>————ㅤoㅤ————</p>
-                                <button className={styles['button_ini2']} onClick={(e) => toggleForm(e, Cataut)}>
-                                    {Cataut ? 'Registrarte Como Usuario' : 'Registrarte Como Cantautor'}
+                                <button className={styles['button_ini2']} onClick={(e) => alternarTipoUsuario(e, esCantautor)}>
+                                    {esCantautor ? 'Registrarte Como Usuario' : 'Registrarte Como Cantautor'}
                                 </button>
                             </>
-                        )}
+                        )} 
                     </form>
                     <p className={styles['footer-text_ini1']}>
                         Al continuar, aceptas nuestrosㅤ
