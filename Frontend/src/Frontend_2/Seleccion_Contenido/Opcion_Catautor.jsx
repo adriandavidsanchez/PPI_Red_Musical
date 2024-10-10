@@ -1,6 +1,9 @@
+import axios from 'axios';
 import { Music, Trash2 } from "lucide-react";
 import React, { useState } from "react";
+import FileUpload from '../../FileUpload';
 import styles from "./Opcion_Catautor.module.css";
+
 
 export default function Opcion_Cantautor() {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
@@ -8,6 +11,34 @@ export default function Opcion_Cantautor() {
     const [menuboton, setmenuboton] = useState(false);
     const [songs, setSongs] = useState(["Canción 1", "Canción 2", "Canción 3", "Canción 4", "Canción 5"]); // Example songs
     const [selectedSongs, setSelectedSongs] = useState([]);
+    const [tituloCancion, setTituloCancion] = useState('');
+    const [descriptionC, setdescriptionC] = useState('');
+    const [artistaId, setArtistaId] = useState(3055555555);
+    const [generoId, setGeneroId] = useState(1);
+
+    const [nombreArchivoAudio, setNombreArchivoAudio] = useState('');
+    const [nombreArchivoImagen, setNombreArchivoImagen] = useState('');
+    const [nombreArchivoVideo, setNombreArchivoVideo] = useState('');
+
+    const [archivoSeleccionadoAudio, setArchivoSeleccionadoAudio] = useState(null);
+    const [archivoSeleccionadoVideo, setArchivoSeleccionadoVideo] = useState(null);
+    const [archivoSeleccionadoImagen, setArchivoSeleccionadoImagen] = useState(null);
+
+    const manejarCambioArchivoAudio = (event) => {
+        const archivo = event.target.files[0];
+        setArchivoSeleccionadoAudio(archivo);
+        setNombreArchivoAudio(archivo ? archivo.name : '');
+    };
+    const manejarCambioArchivoVideo = (event) => {
+        const archivo = event.target.files[0];
+        setArchivoSeleccionadoVideo(archivo);
+        setNombreArchivoVideo(archivo ? archivo.name : '');
+    };
+    const manejarCambioArchivoImagen = (event) => {
+        const archivo = event.target.files[0];
+        setArchivoSeleccionadoImagen(archivo);
+        setNombreArchivoImagen(archivo ? archivo.name : '');
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,29 +64,33 @@ export default function Opcion_Cantautor() {
                 : [...prevSelected, song]
         );
     };
-    
-    const [tituloCancion, setTituloCancion] = useState('');
-    const [descriptionC, setdescriptionC] = useState('');
-    const [audioCancion, setAudioCancion] = useState('');
-    const [videoCancion, setVideoCancion] = useState('');
-    const [imagenCancion, setImagenCancion] = useState('');
-    const [artistaId, setArtistaId] = useState(1);
-    const [generoId, setGeneroId] = useState(1);
+
 
     const registrarCancion = async () => {
         try {
             // Preparar los datos de la canción
+            FileUpload({ folderName: 'Audio', file: archivoSeleccionadoAudio });
+            FileUpload({ folderName: 'Imagen', file: archivoSeleccionadoImagen });
+            if (archivoSeleccionadoVideo != null) {
+                FileUpload({ folderName: 'Video', file: archivoSeleccionadoVideo });
+            }
+
             const nuevaCancion = {
                 tituloCancion: tituloCancion,
-                AudioCancion: audioCancion?.name || null,  // Campo requerido
-                videoCancion: videoCancion?.name || null,
-                imagenCancion: imagenCancion?.name,
-                ArtistaCancion: { contacto: artistaId },
-                generoCancion: { id: generoId },  // El ID del género de la canción
+                audioCancion: nombreArchivoAudio,  // Campo requerido
+                videoCancion: nombreArchivoVideo,
+                imagenCancion: nombreArchivoImagen,
+                artistaCancion: {
+                    contacto: artistaId
+                },
+                generoCancion: {
+                    id: generoId
+                },
+                description: descriptionC
             };
 
             // Realizar la solicitud POST
-            const response = await axios.post('http://localhost:8080/api/canciones/registrar', nuevaCancion, {
+            const response = await axios.post('http://localhost:8080/api/canciones', nuevaCancion, {
                 withCredentials: true,
             });
 
@@ -103,15 +138,15 @@ export default function Opcion_Cantautor() {
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="audio">Audio de la canción</label>
-                                <input id="audio" type="file" accept="audio/*" onChange={(e) => setUsername(e.target.value)} required />
+                                <input id="audio" type="file" accept="audio/*" onChange={manejarCambioArchivoAudio} required />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="image">Imagen de la canción</label>
-                                <input id="image" type="file" accept="image/*" onChange={(e) => setUsername(e.target.value)} required />
+                                <input id="image" type="file" accept="image/*" onChange={manejarCambioArchivoImagen} required />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="video">Video de la canción (opcional)</label>
-                                <input id="video" type="file" accept="video/*" onChange={(e) => setUsername(e.target.value)} />
+                                <input id="video" type="file" accept="video/*" onChange={manejarCambioArchivoVideo} />
                             </div>
                             <div className={styles['form-group']}>
                                 <label htmlFor="genre">Género musical</label>

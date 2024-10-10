@@ -12,9 +12,10 @@ public interface UsuarioService {
 
     Usuario crearUsuario(Usuario usuario);
 
-    boolean eliminarUsuario(Long id);
+    boolean eliminarUsuario(Long id); // Este método no necesita cambios
 
     Usuario actualizarUsuario(Long id, Usuario actualizarUsuario);
 
     Long getLastInsertedId();
 }
+

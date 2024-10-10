@@ -64,6 +64,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             return false; // Retorna false si el usuario no existe
         }
         try {
+            // Primero elimina las canciones asociadas al usuario
+            usuarioRepository.deleteCancionesByUsuarioId(id);
+            // Luego elimina el usuario
             usuarioRepository.deleteById(id);
             return true; // Retorna true si se eliminó correctamente
         } catch (Exception e) {
