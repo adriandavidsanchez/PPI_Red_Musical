@@ -98,5 +98,9 @@ public class CancionServiceImpl implements CancionService {
     public List<Cancion> obtenerCancionesPorGeneroOrdenadasPorCalificacion(Genero genero) {
         return cancionRepository.findByGeneroCancionOrderByCalificacionPromedioDesc(genero);
     }
-    
+    @Override
+    public List<Cancion> obtenerCancionesPorContactoArtista(Long contacto) {
+        // Llamada al método del repositorio para obtener las canciones del artista por su contacto
+        return cancionRepository.findAllByArtistaCancion_Contacto(contacto);
+    }
 }

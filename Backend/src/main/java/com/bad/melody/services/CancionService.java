@@ -23,5 +23,6 @@ public interface CancionService {
     List<Long> obtenerIdsCancionesPorGenero(Genero genero);
 
     List<Cancion> obtenerCancionesPorGeneroOrdenadasPorCalificacion(Genero genero);
-
+;
+    List<Cancion> obtenerCancionesPorContactoArtista(Long contacto);
 }

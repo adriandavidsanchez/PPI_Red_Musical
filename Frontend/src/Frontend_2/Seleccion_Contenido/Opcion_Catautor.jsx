@@ -149,14 +149,19 @@ export default function Opcion_Cantautor() {
                                 <input id="video" type="file" accept="video/*" onChange={manejarCambioArchivoVideo} />
                             </div>
                             <div className={styles['form-group']}>
-                                <label htmlFor="genre">Género musical</label>
+                                <label htmlFor="genre"  >Género musical</label>
                                 <select required id="genre" onChange={(e) => setGeneroId(e.target.selectedIndex)}>
                                     <option value="">Selecciona un género</option>
-                                    <option value="1">Pop</option>
-                                    <option value="2">Rock</option>
-                                    <option value="3">Jazz</option>
-                                    <option value="4">Clásica</option>
-                                    <option value="5">Electrónica</option>
+                                    <option value="1">Rock</option>
+                                    <option value="2">Salsa</option>
+                                    <option value="3">Joropo</option>
+                                    <option value="4">Pop</option>
+                                    <option value="5">Jazz</option>
+                                    <option value="6">Clasica</option>
+                                    <option value="7">Reggaeton</option>
+                                    <option value="8">Hip hop</option>
+                                    <option value="9">Tango</option>
+                                    <option value="10">Electrica</option>
                                 </select>
                             </div>
                             <button onClick={registrarCancion} type="submit" className={styles['submit-button']}>Subir Canción</button>

@@ -105,4 +105,9 @@ public class CancionController {
         // Llama al servicio para obtener las canciones ordenadas por calificación promedio
         return cancionService.obtenerCancionesPorGeneroOrdenadasPorCalificacion(genero);
     }
+    @GetMapping("/artista/{contacto}")
+    public ResponseEntity<List<Cancion>> obtenerCancionesPorContactoArtista(@PathVariable Long contacto) {
+        List<Cancion> canciones = cancionService.obtenerCancionesPorContactoArtista(contacto);
+        return ResponseEntity.ok(canciones);
+    }
 }

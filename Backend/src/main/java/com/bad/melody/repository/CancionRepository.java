@@ -18,5 +18,6 @@ public interface CancionRepository extends JpaRepository<Cancion, Long> {
     @Query("SELECT c FROM Cancion c WHERE c.generoCancion = :genero ORDER BY " +
             "(SELECT AVG(co.calificacion) FROM ComentarioCancion co WHERE co.cancion = c) DESC")
     List<Cancion> findByGeneroCancionOrderByCalificacionPromedioDesc(Genero genero);
-    
+
+    List<Cancion> findAllByArtistaCancion_Contacto(Long contacto);
 }

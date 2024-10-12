@@ -16,14 +16,27 @@ const RedesignedComponent = () => {
     const [cancionElegida, setcancionElegida] = useState(null);
     const [fileUrl, setFileUrl] = useState('');
     const [imagenUsuario, setImagenUsuario] = useState(null);
+    const [cancionesArtista, setCancionesArtista] = useState([]);
+
+    const [fileUrlsImg, setFileUrlsImg] = useState([]);
+    const [fileUrls, setFileUrls] = useState([]);
+
+    const addUrl = (newUrl) => {
+        setFileUrlsImg((prevUrls) => [...prevUrls, newUrl]);
+    };
+
+    useEffect(() => {
+        const imagenCancion = cancionesArtista.map(cancion => cancion.imagenCancion);
+        addUrl(imagenCancion);
+    }, [cancionesArtista]);
+    
+
 
     const getGenreIndex = (genre) => {
         return genres.indexOf(genre);
     };
 
-    // Ejemplo de uso
     const index = getGenreIndex(textoCompartido);
-    console.log(index)
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/canciones/por-genero/${index + 1}`)
@@ -51,8 +64,35 @@ const RedesignedComponent = () => {
         setcancionElegida(cancion);
         setTextoCompartidoAudio(cancion.audioCancion);
         setImagenUsuario(cancion.imagenCancion)
+        axios.get(`http://localhost:8080/api/canciones/artista/${cancion.artistaCancion.contacto}`)
+            .then(response => {
+                setCancionesArtista(response.data);
+            })
+            .catch(error => {
+                console.error('Error al obtener las canciones del artista:', error);
+            });
     };
 
+    useEffect(() => {
+        const obtenerUrls = async () => {
+            const cancionesConUrls = await Promise.all(cancionesArtista.map(async (cancion) => {
+                const fileRef = ref(storage, `Imagen/${cancion.imagenCancion}`);
+                try {
+                    const url = await getDownloadURL(fileRef);
+                    return { ...cancion, imageUrl: url };
+                } catch (error) {
+                    console.error('Error al obtener la URL de descarga de la imagen:', error);
+                    return { ...cancion, imageUrl: null };
+                }
+            }));
+            setCancionesArtista(cancionesConUrls);
+        };
+    
+        if (cancionesArtista.length > 0) {
+            obtenerUrls();
+        }
+    }, [cancionesArtista]);
+    
     useEffect(() => {
         // Verifica que la imagen esté disponible
         if (imagenUsuario) {
@@ -91,7 +131,7 @@ const RedesignedComponent = () => {
                                 <tr>
                                     <th>#</th>
                                     <th>Song</th>
-                                    <th style={{ paddingRight: '0px', paddingLeft: "0px" }}>Duration</th>
+                                    <th style={{ paddingRight: '0px', paddingLeft: "0px" }}>ㅤAño</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -163,33 +203,36 @@ const RedesignedComponent = () => {
                                     Cada canción es un testimonio de la belleza y el poder de la música.</p>
                             </div>
                         )}
-                        <h2>Album Details</h2>
-                        <div>
-                            <div style={{ display: 'flex' }}>
-                                <div onClick={AlbumClick}>
-                                    <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis6.jpg" alt="Album Name" />
-                                    <p className={styles['texto5']}>Resistance</p>
-                                    <p className={styles['texto6']}>Electrónica</p>
-                                </div>
-                                <div style={{ marginLeft: '20px' }} onClick={AlbumClick}>
-                                    <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis7.jpg" alt="Album Name" />
-                                    <p className={styles['texto5']}>Black Holes and Revelations</p>
-                                    <p className={styles['texto6']}>Clásica</p>
+                        {cancionesArtista.length > 0 ? (
+                            <div>
+                                <h2>Canciones del mismo artista</h2>
+                                <div className={styles['related-albums']}>
+                                    {cancionesArtista.reduce((rows, cancion, index) => {
+                                        if (index % 2 === 0) rows.push([]);
+                                        rows[rows.length - 1].push(cancion);
+                                        return rows;
+                                    }, []).map((row, rowIndex) => (
+                                        <div key={rowIndex} style={{ marginBottom: '20px' }}>
+                                            {row.map((cancion, index) => (
+                                                <div key={index}  onClick={AlbumClick}>
+                                                    <img
+                                                        className={styles['Discos12']}
+                                                        src={cancion.imageUrl}
+                                                        alt={cancion.tituloCancion}
+                                                    />
+                                                    <p className={styles['texto5']}>{cancion.tituloCancion}</p>
+                                                    <p className={styles['texto6']}>{cancion.generoCancion.nombreGenero}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                            <div style={{ display: 'flex' }}>
-                                <div onClick={AlbumClick}>
-                                    <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis8.jpg" alt="Album Name" />
-                                    <p className={styles['texto5']}>Absolution</p>
-                                    <p className={styles['texto6']}>Rock</p>
-                                </div>
-                                <div style={{ marginLeft: '20px' }} onClick={AlbumClick}>
-                                    <img className={styles['Discos12']} src="/src/assets/imagenes/Gestion-prueva/dis9.jpg" alt="Album Name" />
-                                    <p className={styles['texto5']}>Origin of Symmetry</p>
-                                    <p className={styles['texto6']}>Pop</p>
-                                </div>
+                        ) : (
+                            <div>
+                                <h2>Selecciona una canción para ver más detalles</h2>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

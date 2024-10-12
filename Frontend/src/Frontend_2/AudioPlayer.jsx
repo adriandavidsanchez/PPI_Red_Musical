@@ -21,7 +21,7 @@ const AudioPlayer = () => {
         setFileUrl(url);
         console.log('URL de descarga:', url);
       }).catch((error) => {
-        console.error('Error al obtener la URL de descarga:', error,textoCompartidoAudio);
+        console.error('Error al obtener la URL de descarga:', error);
       });
     }
   }, [textoCompartidoAudio, storage]);
