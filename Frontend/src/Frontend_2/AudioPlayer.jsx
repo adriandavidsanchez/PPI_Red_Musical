@@ -1,13 +1,42 @@
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import React, { useEffect, useRef, useState } from 'react';
+import { textoCompartidoAudio } from '../Variables';
 import './AudioPlayer.css';
 
 const AudioPlayer = () => {
+  console.log(textoCompartidoAudio);
+  const storage = getStorage();
+  const [fileUrl, setFileUrl] = useState('/src/assets/imagenes/gestion-prueva/dis5.mp3');
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
   const progressRef = useRef(null);
+
+  useEffect(() => {
+    if (textoCompartidoAudio) {
+      const fileRef1 = ref(storage, `Audio/${textoCompartidoAudio}`);
+      getDownloadURL(fileRef1).then((url) => {
+        setFileUrl(url);
+        console.log('URL de descarga:', url);
+      }).catch((error) => {
+        console.error('Error al obtener la URL de descarga:', error,textoCompartidoAudio);
+      });
+    }
+  }, [textoCompartidoAudio, storage]);
+
+  // Efecto para reiniciar el audio cuando cambia la URL del archivo
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.load();  // Recargar el nuevo archivo de audio
+      setIsPlaying(false);  // Pausar cuando la canción cambie
+      setProgress(0);
+      setCurrentTime(0);
+      setDuration(0);
+    }
+  }, [fileUrl]);
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -63,7 +92,7 @@ const AudioPlayer = () => {
   return (
     <div className="audio-player">
       <audio ref={audioRef}>
-        <source src="/src/assets/imagenes/gestion-prueva/dis5.mp3" type="audio/mp3" />
+        <source src={fileUrl} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
       <button onClick={togglePlayPause} className="play-pause-button">
@@ -90,4 +119,3 @@ const AudioPlayer = () => {
 };
 
 export default AudioPlayer;
-

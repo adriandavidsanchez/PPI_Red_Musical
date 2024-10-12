@@ -1,5 +1,7 @@
 package com.bad.melody.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +29,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Transactional
     @Query("DELETE FROM Cancion c WHERE c.artistaCancion.contacto = :usuarioId")
     void deleteCancionesByUsuarioId(@Param("usuarioId") Long usuarioId);
+
+    List<Usuario> findTop2ByOrderByContactoDesc();
 }

@@ -1,5 +1,7 @@
 package com.bad.melody.services;
 
+import java.util.List;
+
 import com.bad.melody.model.Usuario;
 
 public interface UsuarioService {
@@ -17,5 +19,9 @@ public interface UsuarioService {
     Usuario actualizarUsuario(Long id, Usuario actualizarUsuario);
 
     Long getLastInsertedId();
+    
+    Usuario obtenerUsuarioPorContacto(Long contacto);
+    
+    List<Usuario> obtenerUltimosDosUsuarios();
 }
 

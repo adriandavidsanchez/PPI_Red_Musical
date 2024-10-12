@@ -2,14 +2,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { setTextoCompartido } from '../../Variables.jsx';
 import styles from './Carrucel.module.css'; // Asegúrate de que el nombre del archivo sea correcto
 
 
 // Lista de géneros
 const genres = [
   'Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica',
-  'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica'
+  'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica','Personalizado'
 ];
+
 
 // Función para dividir el array en bloques de tamaño `size`
 const chunkArray = (array, size) => {
@@ -21,6 +23,7 @@ const chunkArray = (array, size) => {
 };
 
 const GenresCarousel = () => {
+  
   const navigate = useNavigate();
   // Divide los géneros en bloques de 5
   const genreChunks = chunkArray(genres, 5);
@@ -28,6 +31,7 @@ const GenresCarousel = () => {
   // Función que se ejecuta al hacer clic en una tarjeta
   const handleCardClick = (genre) => {
     console.log(`Clicked on: ${genre}`);
+    setTextoCompartido(genre)
     navigate('/detalle');
     
     // Por ejemplo: window.location.href = `/genres/${genre.toLowerCase()}`;
@@ -35,8 +39,8 @@ const GenresCarousel = () => {
 
   return (
     <div className={styles['genres-section12']} style={{ marginLeft: '250px', marginRight: '250px' }}>
-      <h2 className="mb-4">Genres</h2>
-      <Carousel interval={5000}>
+      <h2 className="mb-4">Generos</h2>
+      <Carousel interval={2000}>
         {genreChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
             <div className={`d-flex justify-content-around align-items-center`} style={{ height: '140px' }}>

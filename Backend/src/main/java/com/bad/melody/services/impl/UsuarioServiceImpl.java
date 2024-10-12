@@ -1,5 +1,7 @@
 package com.bad.melody.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +75,15 @@ public class UsuarioServiceImpl implements UsuarioService {
             return false; // Retorna false si ocurrió un error
         }
     }
+    @Override
+    public List<Usuario> obtenerUltimosDosUsuarios() {
+        return usuarioRepository.findTop2ByOrderByContactoDesc(); // Ordena por id descendente y toma los dos primeros
+    }
     
+    @Override
+    public Usuario obtenerUsuarioPorContacto(Long contacto) {
+        return usuarioRepository.findByContacto(contacto);
+    }
 
 }
 

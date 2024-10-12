@@ -2,6 +2,7 @@ package com.bad.melody.services.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ import com.bad.melody.services.CancionService;
 
 @Service
 public class CancionServiceImpl implements CancionService {
-    
+
+
     @Autowired
     private CancionRepository cancionRepository;
 
@@ -37,6 +39,12 @@ public class CancionServiceImpl implements CancionService {
             .orElseThrow(() -> new NoSuchElementException("Cancion no encontrada con id: " + id));
     }
 
+    @Override
+    public List<Cancion> obtenerUltimasDosCanciones() {
+        // Asume que tienes una columna de "id" autoincremental que refleja el orden de inserción
+        return cancionRepository.findTop2ByOrderByIdDesc();  // Ordena por id descendente y toma los dos primeros
+    }
+    
     @Override
     public Cancion guardarCancion(Cancion nuevaCancion) {
         Usuario usuarioExistente = usuarioRepository.findByContacto(nuevaCancion.getArtistaCancion().getContacto());
@@ -78,4 +86,17 @@ public class CancionServiceImpl implements CancionService {
             return false;
         }
     }
+
+    @Override
+    public List<Long> obtenerIdsCancionesPorGenero(Genero genero) {
+        List<Cancion> canciones = cancionRepository.findByGeneroCancion(genero);
+        return canciones.stream().map(Cancion::getId).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Cancion> obtenerCancionesPorGeneroOrdenadasPorCalificacion(Genero genero) {
+        return cancionRepository.findByGeneroCancionOrderByCalificacionPromedioDesc(genero);
+    }
+    
 }

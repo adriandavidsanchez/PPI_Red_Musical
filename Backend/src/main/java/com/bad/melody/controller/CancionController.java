@@ -1,6 +1,7 @@
 package com.bad.melody.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bad.melody.model.Cancion;
+import com.bad.melody.model.Genero;
 import com.bad.melody.services.CancionService;
 
 @RestController
@@ -85,5 +87,22 @@ public class CancionController {
     public ResponseEntity<Long> contarCanciones() {
         Long total = cancionService.contarCanciones();
         return new ResponseEntity<>(total, HttpStatus.OK);
+    }
+
+    @GetMapping("/ultimas-dos")
+    public ResponseEntity<List<Long>> obtenerIdsUltimasDosCanciones() {
+        List<Cancion> ultimasDosCanciones = cancionService.obtenerUltimasDosCanciones();
+        List<Long> ids = ultimasDosCanciones.stream()
+                                            .map(Cancion::getId)  // Obtiene los IDs
+                                            .collect(Collectors.toList());
+        return new ResponseEntity<>(ids, HttpStatus.OK);
+    }
+    @GetMapping("/por-genero/{idGenero}")
+    public List<Cancion> obtenerCancionesPorGenero(@PathVariable Long idGenero) {
+        Genero genero = new Genero();
+        genero.setId(idGenero);
+    
+        // Llama al servicio para obtener las canciones ordenadas por calificación promedio
+        return cancionService.obtenerCancionesPorGeneroOrdenadasPorCalificacion(genero);
     }
 }
