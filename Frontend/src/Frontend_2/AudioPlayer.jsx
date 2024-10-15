@@ -4,7 +4,6 @@ import { textoCompartidoAudio } from '../Variables';
 import './AudioPlayer.css';
 
 const AudioPlayer = () => {
-  console.log(textoCompartidoAudio);
   const storage = getStorage();
   const [fileUrl, setFileUrl] = useState('/src/assets/imagenes/gestion-prueva/dis5.mp3');
   const [isPlaying, setIsPlaying] = useState(false);

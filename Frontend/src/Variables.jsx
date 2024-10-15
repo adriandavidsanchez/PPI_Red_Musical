@@ -8,7 +8,7 @@ let setTextoCompartidoAudio = (nuevoTexto) => {
 };
 let textoCompartidoCancion = [];
 let setTextoCompartidoCancion = (nuevoTexto) => {
-    textoCompartidoAudio = nuevoTexto;
+    textoCompartidoCancion = nuevoTexto;
 };
 export { setTextoCompartido, setTextoCompartidoAudio, setTextoCompartidoCancion, textoCompartido, textoCompartidoAudio, textoCompartidoCancion };
 

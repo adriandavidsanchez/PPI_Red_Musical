@@ -2,10 +2,10 @@ import axios from 'axios';
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { setTextoCompartidoAudio, textoCompartido } from '../../Variables.jsx';
+import { setTextoCompartidoAudio, setTextoCompartidoCancion, textoCompartido } from '../../Variables.jsx';
 import AudioPlayer from '../AudioPlayer';
 import Opcion_Cantautor from './Opcion_Catautor';
-import styles from './seleccion_contenido.module.css'; // Asegúrate de que el nombre del archivo sea correcto
+import styles from './seleccion_contenido.module.css';
 
 const storage = getStorage();
 
@@ -50,57 +50,66 @@ const RedesignedComponent = () => {
     }, []);
 
     console.log(textoCompartido)
-
-
+    const AlbumClick2 = async (event, variable) => {
+        if (event) {
+            event.preventDefault();
+        }
+        setTextoCompartidoCancion(variable);
+        navigate('/final');
+    };
+    const handleClick = (variable) => (event) => AlbumClick2(event, variable);
 
     const navigate = useNavigate();
     const AlbumClick = async (event) => {
-        event.preventDefault(); // Esto previene el comportamiento predeterminado del clic, si existe alguno.
-        console.log('hola'); // Este mensaje debería aparecer en la consola
-        navigate('/final'); // Navegar a la ruta '/detalle'
+        event.preventDefault();
+        console.log('hola');
+        navigate('/final');
     };
 
     const handleRowClick = (cancion) => {
         setcancionElegida(cancion);
         setTextoCompartidoAudio(cancion.audioCancion);
-        setImagenUsuario(cancion.imagenCancion)
+        setImagenUsuario(cancion.imagenCancion);
+    
+        // Solicitar las canciones del artista
         axios.get(`http://localhost:8080/api/canciones/artista/${cancion.artistaCancion.contacto}`)
             .then(response => {
-                setCancionesArtista(response.data);
+                setCancionesArtista(response.data); // Actualizar las canciones del artista
             })
             .catch(error => {
                 console.error('Error al obtener las canciones del artista:', error);
             });
     };
-
+    
     useEffect(() => {
         const obtenerUrls = async () => {
-            const cancionesConUrls = await Promise.all(cancionesArtista.map(async (cancion) => {
-                const fileRef = ref(storage, `Imagen/${cancion.imagenCancion}`);
-                try {
-                    const url = await getDownloadURL(fileRef);
-                    return { ...cancion, imageUrl: url };
-                } catch (error) {
-                    console.error('Error al obtener la URL de descarga de la imagen:', error);
-                    return { ...cancion, imageUrl: null };
-                }
-            }));
-            setCancionesArtista(cancionesConUrls);
+            if (cancionesArtista.length > 0) {
+                const cancionesConUrls = await Promise.all(cancionesArtista.map(async (cancion) => {
+                    if (cancion.imageUrl) return cancion;
+                    const fileRef = ref(storage, `Imagen/${cancion.imagenCancion}`);
+                    try {
+                        const url = await getDownloadURL(fileRef);
+                        return { ...cancion, imageUrl: url };
+                    } catch (error) {
+                        console.error('Error al obtener la URL de descarga de la imagen:', error);
+                        return { ...cancion, imageUrl: null };
+                    }
+                }));
+                setCancionesArtista(cancionesConUrls);
+            }
         };
     
-        if (cancionesArtista.length > 0) {
-            obtenerUrls();
-        }
+        obtenerUrls();
     }, [cancionesArtista]);
     
     useEffect(() => {
-        // Verifica que la imagen esté disponible
+        
         if (imagenUsuario) {
-            const fileRef = ref(storage, `Imagen/${imagenUsuario}`); // Cambia la ruta según corresponda
+            const fileRef = ref(storage, `Imagen/${imagenUsuario}`);
 
             getDownloadURL(fileRef)
                 .then((url) => {
-                    setFileUrl(url); // Guardar la URL de la imagen
+                    setFileUrl(url);
                     console.log('URL de descarga de la imagen:', url);
                     console.log(fileUrl);
                 })
@@ -151,14 +160,14 @@ const RedesignedComponent = () => {
                             <div className={styles['now-playing']}>
                                 <h2>Reproducción Actual</h2>
                                 <div className={styles['now-playing-info']}>
-                                    <div className={styles['album-cover1']} onClick={AlbumClick}>
+                                    <div className={styles['album-cover1']}  /*onClick={AlbumClick}*/>
                                         <img src={fileUrl} alt="Album Cover" ></img>
                                     </div>
                                     <div>
                                         <div>
                                             <h2>{cancionElegida.artistaCancion.nombre}</h2>
                                             <h3><b>{cancionElegida.tituloCancion}</b></h3>
-                                            <p style={{ marginTop: "30px" }}><b>Lanzamiento:</b> 14 de septiembre, 2010</p>
+                                            <p style={{ marginTop: "30px" }}><b>Lanzamiento:</b> {`${cancionElegida.fechaSubidaCancion.slice(0, 4)}${cancionElegida.fechaSubidaCancion.slice(4, 6)}${cancionElegida.fechaSubidaCancion.slice(6)}`}</p>
                                             <p><b>Género:</b> {cancionElegida.generoCancion.nombreGenero}</p>
                                         </div>
                                     </div>
@@ -178,7 +187,7 @@ const RedesignedComponent = () => {
                                 <h2>Descripción</h2>
                                 <div className={styles['related-albums']}>
                                     <div>
-                                        <div className={styles['album-cover']} onClick={AlbumClick}>
+                                        <div className={styles['album-cover']} /*onClick={AlbumClick}*/>
                                             <img src={fileUrl} alt="Album Cover" />
                                         </div>
                                     </div>
@@ -214,7 +223,7 @@ const RedesignedComponent = () => {
                                     }, []).map((row, rowIndex) => (
                                         <div key={rowIndex} style={{ marginBottom: '20px' }}>
                                             {row.map((cancion, index) => (
-                                                <div key={index}  onClick={AlbumClick}>
+                                                <div key={index}  onClick={handleClick(cancion)}>
                                                     <img
                                                         className={styles['Discos12']}
                                                         src={cancion.imageUrl}

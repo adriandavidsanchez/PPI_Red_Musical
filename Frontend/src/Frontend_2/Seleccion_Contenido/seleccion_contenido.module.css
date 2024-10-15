@@ -36,11 +36,11 @@ header {
 
 .overlay {
     position: absolute;
-    right: 0; /* Posiciona el div en el lado derecho */
-    top: 0; /* Posiciona el div en la parte superior */
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para que se vea el contenido debajo */
+    right: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
-    z-index: 1; /* Asegura que el div esté por encima de otros elementos */
+    z-index: 1;
 }
 .isotipo12 {
     width: 75px;

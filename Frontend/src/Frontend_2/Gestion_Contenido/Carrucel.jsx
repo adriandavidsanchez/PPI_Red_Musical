@@ -3,17 +3,17 @@ import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { setTextoCompartido } from '../../Variables.jsx';
-import styles from './Carrucel.module.css'; // Asegúrate de que el nombre del archivo sea correcto
+import styles from './Carrucel.module.css';
 
 
-// Lista de géneros
+
 const genres = [
   'Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica',
   'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica','Personalizado'
 ];
 
 
-// Función para dividir el array en bloques de tamaño `size`
+
 const chunkArray = (array, size) => {
   const result = [];
   for (let i = 0; i < array.length; i += size) {
@@ -25,16 +25,14 @@ const chunkArray = (array, size) => {
 const GenresCarousel = () => {
   
   const navigate = useNavigate();
-  // Divide los géneros en bloques de 5
+
   const genreChunks = chunkArray(genres, 5);
 
-  // Función que se ejecuta al hacer clic en una tarjeta
   const handleCardClick = (genre) => {
     console.log(`Clicked on: ${genre}`);
     setTextoCompartido(genre)
     navigate('/detalle');
     
-    // Por ejemplo: window.location.href = `/genres/${genre.toLowerCase()}`;
   };
 
   return (
@@ -49,7 +47,7 @@ const GenresCarousel = () => {
                   key={genreIndex}
                   className={`${styles['genre-card12']} p-2`}
                   style={{ width: '260px', height: '120px', cursor: 'pointer' }}
-                  onClick={() => handleCardClick(genre)} // Añade el evento onClick
+                  onClick={() => handleCardClick(genre)}
                   
                 >
                   <Card.Body className={`d-flex justify-content-center align-items-center`}>

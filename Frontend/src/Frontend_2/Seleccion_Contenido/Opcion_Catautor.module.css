@@ -133,7 +133,7 @@ button{
     cursor: pointer;
 }
 input[type="file"]::file-selector-button {
-    background-color: #ffffff; /* Cambia el color de fondo del botón */
+    background-color: #ffffff;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -147,7 +147,7 @@ input[type="file"]::file-selector-button {
     cursor: pointer;
     font-size: 34px;
     display: flex;
-    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    flex-direction: column;
 }
 .top{
     display: flex;

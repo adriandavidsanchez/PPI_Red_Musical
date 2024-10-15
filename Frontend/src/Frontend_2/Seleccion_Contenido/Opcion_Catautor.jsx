@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Music, Trash2 } from "lucide-react";
+import { Music } from "lucide-react";
 import React, { useState } from "react";
 import FileUpload from '../../FileUpload';
 import styles from "./Opcion_Catautor.module.css";
@@ -9,11 +9,11 @@ export default function Opcion_Cantautor() {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [menuboton, setmenuboton] = useState(false);
-    const [songs, setSongs] = useState(["Canción 1", "Canción 2", "Canción 3", "Canción 4", "Canción 5"]); // Example songs
+    const [songs, setSongs] = useState(["Canción 1", "Canción 2", "Canción 3", "Canción 4", "Canción 5"]);
     const [selectedSongs, setSelectedSongs] = useState([]);
     const [tituloCancion, setTituloCancion] = useState('');
     const [descriptionC, setdescriptionC] = useState('');
-    const [artistaId, setArtistaId] = useState(3055555555);
+    const [artistaId, setArtistaId] = useState(3101010101);
     const [generoId, setGeneroId] = useState(1);
 
     const [nombreArchivoAudio, setNombreArchivoAudio] = useState('');
@@ -42,7 +42,7 @@ export default function Opcion_Cantautor() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Aquí iría la lógica para manejar la subida de la canción
+        
         console.log("Canción subida");
         setIsAddDialogOpen(false);
     };
@@ -68,7 +68,7 @@ export default function Opcion_Cantautor() {
 
     const registrarCancion = async () => {
         try {
-            // Preparar los datos de la canción
+            
             FileUpload({ folderName: 'Audio', file: archivoSeleccionadoAudio });
             FileUpload({ folderName: 'Imagen', file: archivoSeleccionadoImagen });
             if (archivoSeleccionadoVideo != null) {
@@ -77,7 +77,7 @@ export default function Opcion_Cantautor() {
 
             const nuevaCancion = {
                 tituloCancion: tituloCancion,
-                audioCancion: nombreArchivoAudio,  // Campo requerido
+                audioCancion: nombreArchivoAudio,
                 videoCancion: nombreArchivoVideo,
                 imagenCancion: nombreArchivoImagen,
                 artistaCancion: {
@@ -89,7 +89,7 @@ export default function Opcion_Cantautor() {
                 description: descriptionC
             };
 
-            // Realizar la solicitud POST
+            
             const response = await axios.post('http://localhost:8080/api/canciones', nuevaCancion, {
                 withCredentials: true,
             });
@@ -112,10 +112,12 @@ export default function Opcion_Cantautor() {
                             <Music className={styles['icon']} />
                             <span>Subir Canción</span>
                         </button>
+                        {/*
                         <button onClick={() => { setIsDeleteDialogOpen(true); setSelectedSongs([]); menu(); }}>
                             <Trash2 className={styles['icon']} />
                             <span>Eliminar Canciones</span>
                         </button>
+                        */}
                     </div>
                 )}
             </div>

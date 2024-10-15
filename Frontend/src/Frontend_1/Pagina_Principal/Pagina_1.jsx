@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UserForm from '../section_start/Inicio1';
-import styles from './Pagina.module.css'; // Cambia './2Pagina_1.css' y './Pagina_1.css' a un solo archivo de módulo CSS
+import styles from './Pagina.module.css';
 
 function Pagina_1() {
   const [showForm, setShowForm] = useState(false);
@@ -11,15 +11,14 @@ function Pagina_1() {
     setShowForm(true);
   }
   useEffect(() => {
-    // Selecciona todos los elementos <a> en el documento
 const links = document.querySelectorAll('a');
 
-// Recorre cada enlace y cambia su color a negro
+
 links.forEach(link => {
   link.style.color = 'white';
 });
 
-    // Aplica los estilos al montar el componente
+    
     document.body.style.backgroundColor = '#0f0d13';
     document.body.style.margin = '0';
     document.body.style.margin = '0';
@@ -27,11 +26,11 @@ links.forEach(link => {
     document.body.style.fontFamily = 'Arial, sans-serif';
     document.body.style.color = 'white';
     
-    // Aplica otros estilos globales si es necesario
-    document.body.style.color = 'white'; // Color de texto general
-    document.body.style.transition = 'background-color 0.5s ease'; // Transición suave
     
-    // Limpia los estilos al desmontar el componente
+    document.body.style.color = 'white';
+    document.body.style.transition = 'background-color 0.5s ease';
+    
+
     return () => {
       document.body.style.color = 'black'
       document.body.style.backgroundColor = '';

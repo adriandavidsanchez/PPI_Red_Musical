@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './valoracion_contenido.module.css'; // Asegúrate de usar un archivo de módulo CSS
-
 import styled from 'styled-components';
-
+import { setTextoCompartidoAudio, textoCompartidoCancion } from '../../Variables.jsx';
+import AudioPlayer from '../AudioPlayer';
+import styles from './valoracion_contenido.module.css';
 const StyledButton = styled.button`
     padding: 10px;
     background-color: #007bff;
@@ -12,16 +12,25 @@ const StyledButton = styled.button`
     cursor: pointer;
 `;
 
+
+
+
 function Valoracion() {
+    setTextoCompartidoAudio(textoCompartidoCancion.audioCancion);
 
     return (
         <div className={styles['container']}>
+            
             <div className={styles['video-container']}>
+                {/*
                 <video className={styles['video']} controls>
-                    <source src="/src/assets/imagenes/gestion-prueva/dis11.mp4" type="video/mp4" />
+                    <source src={textoCompartidoCancion.audioCancion} type="Audio/mp4" />
                 </video>
+                */}
+                <img src={textoCompartidoCancion.imageUrl} style={{width: '760px'}} alt="Album Cover2" />
+                <AudioPlayer />
                 <div className={styles['video-info']}>
-                    <h2>Pumped Up Kicks</h2>
+                    <h2>{textoCompartidoCancion.tituloCancion}</h2>
                     <div className={styles['rating']}>
                         <span className={`${styles['star']} ${styles['filled']}`}>&#9733;</span>
                         <span className={`${styles['star']} ${styles['filled']}`}>&#9733;</span>

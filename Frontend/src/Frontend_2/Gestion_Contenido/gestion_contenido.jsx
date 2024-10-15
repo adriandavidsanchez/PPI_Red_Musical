@@ -4,16 +4,16 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import GenresCarousel from './Carrucel';
-import styles from './gestion_contenido.module.css'; // Asegúrate de que el nombre del archivo sea correcto
+import styles from './gestion_contenido.module.css';
 
 const storage = getStorage();
 
 export default function Component12() {
   useEffect(() => {
-    // Aplica los estilos al montar el componente
+    
     document.body.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif';
     document.body.style.padding = '0px';
-    // Limpia los estilos al desmontar el componente
+    
   }, []);
 
   const [UltimousuarioId, SetUltimousuarioId] = useState(null);
@@ -50,18 +50,18 @@ export default function Component12() {
 
   const obtenerUltimosusuarios = async () => {
     try {
-      // Hacer la solicitud al backend
+      
       const response = await axios.get('http://localhost:8080/api/usuarios/ultimos-dos');
-      const [id1, id2] = response.data; // Desestructuramos los IDs
-      SetUltimousuarioId(id1); // Guardamos el último ID
-      SetUltimousuarioId2(id2); // Guardamos el penúltimo ID
+      const [id1, id2] = response.data;
+      SetUltimousuarioId(id1);
+      SetUltimousuarioId2(id2);
     } catch (error) {
       console.error('Error al obtener las últimas canciones:', error);
     }
   };
 
   const obtenerUsuario2 = async () => {
-    if (UltimousuarioId) { // Verifica que Usuario esté disponible
+    if (UltimousuarioId) {
       try {
         const response = await axios.get(`/api/usuarios/${UltimousuarioId2}`);
         const usuario = response.data;
@@ -75,7 +75,7 @@ export default function Component12() {
     }
   };
   const obtenerUsuario1 = async () => {
-    if (UltimousuarioId2) { // Verifica que Usuario esté disponible
+    if (UltimousuarioId2) {
       try {
         const response = await axios.get(`/api/usuarios/${UltimousuarioId}`);
         const usuario = response.data;
@@ -93,11 +93,11 @@ export default function Component12() {
   useEffect(() => {
     const obtenerUltimasCanciones = async () => {
       try {
-        // Hacer la solicitud al backend
+        
         const response = await axios.get('http://localhost:8080/api/canciones/ultimas-dos');
-        const [id1, id2] = response.data; // Desestructuramos los IDs
-        setUltimaCancionId(id1); // Guardamos el último ID
-        setPenultimaCancionId(id2); // Guardamos el penúltimo ID
+        const [id1, id2] = response.data;
+        setUltimaCancionId(id1);
+        setPenultimaCancionId(id2);
       } catch (error) {
         console.error('Error al obtener las últimas canciones:', error);
       }
@@ -105,7 +105,7 @@ export default function Component12() {
 
 
     const obtenerCancion2 = async () => {
-      if (penultimaCancionId) { // Verifica que ultimaCancionId esté disponible
+      if (penultimaCancionId) {
         try {
           const response = await axios.get(`/api/canciones/${penultimaCancionId}`);
           const cancion = response.data;
@@ -120,7 +120,7 @@ export default function Component12() {
     };
 
     const obtenerCancion1 = async () => {
-      if (ultimaCancionId) { // Verifica que ultimaCancionId esté disponible
+      if (ultimaCancionId) {
         try {
           const response = await axios.get(`/api/canciones/${ultimaCancionId}`);
           const cancion = response.data;
@@ -137,52 +137,49 @@ export default function Component12() {
     
 
     obtenerUltimosusuarios();
-    obtenerUltimasCanciones(); 
+    obtenerUltimasCanciones();
     obtenerUsuario1();
-    obtenerUsuario2(); // Llamar a la función de obtención de las dos últimas canciones
+    obtenerUsuario2();
     obtenerCancion1();
-    obtenerCancion2();  // Llamar a la función de obtención de la canción
-  }, [ultimaCancionId, penultimaCancionId, UltimousuarioId, UltimousuarioId2]); // Añadir ultimaCancionId como dependencia
+    obtenerCancion2();
+  }, [ultimaCancionId, penultimaCancionId, UltimousuarioId, UltimousuarioId2]);
 
-  // Obtener la URL de la imagen desde Firebase Storage
 
   useEffect(() => {
-    // Verifica que las imágenes estén disponibles
+
     if (imagenUsuario && imagenUsuario2) {
 
-      // Referencias a las imágenes en Firebase Storage
       const fileRef1 = ref(storage, `Imagen/${imagenCancion}`);
       const fileRef2 = ref(storage, `Imagen/${imagenCancion2}`);
       const fileRef3 = ref(storage, `Imagen/${imagenUsuario}`);
       const fileRef4 = ref(storage, `Imagen/${imagenUsuario2}`);
-      // Obtener URL de la primera imagen
+
       getDownloadURL(fileRef1).then((url) => {
-        setFileUrl(url);  // Guardar la URL de la primera imagen
+        setFileUrl(url);
         console.log('URL de descarga imagen 1:', url);
       }).catch((error) => {
         console.error('Error al obtener la URL de descarga imagen 1:', error);
       });
 
-      // Obtener URL de la segunda imagen
+
       getDownloadURL(fileRef2).then((url2) => {
-        setFileUrl2(url2);  // Guardar la URL de la segunda imagen
+        setFileUrl2(url2);
         console.log('URL de descarga imagen 2:', url2);
       }).catch((error) => {
         console.error('Error al obtener la URL de descarga imagen 2:', error);
       });
 
 
-      // Obtener URL de la primera imagen
+
       getDownloadURL(fileRef3).then((url3) => {
-        setFileUr3(url3);  // Guardar la URL de la primera imagen
+        setFileUr3(url3);
         console.log('URL de descarga imagen 1:', url3);
       }).catch((error) => {
         console.error('Error al obtener la URL de descarga imagen 1:', error);
       });
 
-      // Obtener URL de la segunda imagen
       getDownloadURL(fileRef4).then((url4) => {
-        setFileUr4(url4);  // Guardar la URL de la segunda imagen
+        setFileUr4(url4);
         console.log('URL de descarga imagen 2:', url4);
       }).catch((error) => {
         console.error('Error al obtener la URL de descarga imagen 2:', error);

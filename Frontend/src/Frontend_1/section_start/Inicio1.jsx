@@ -5,7 +5,7 @@ import FileUpload from '../../FileUpload';
 import styles from './inicio1.module.css';
 
 const UserForm = ({ onClose, formType }) => {
-    // Estados del formulario //
+    
     const [nombreUsuario, setnombreUsuario] = useState('');
     const [contrasena, setcontrasena] = useState('');
     const [email, setEmail] = useState('');
@@ -13,15 +13,15 @@ const UserForm = ({ onClose, formType }) => {
     const [contacto, setContacto] = useState('');
     const [esCantautor, setEsCantautor] = useState(false);
     const [indiceGenero, setIndiceGenero] = useState(null);
-    const [nombreArchivo, setNombreArchivo] = useState('');  // Estado para el nombre del archivo
+    const [nombreArchivo, setNombreArchivo] = useState('');
     const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
 
     const navigate = useNavigate();
-    // Lista de géneros musicales disponibles //
+    
 
     const generosDisponibles  = ['Rock', 'Salsa', 'Joropo', 'Pop', 'Jazz', 'Clásica', 'Reggaeton', 'Hip Hop', 'Tango', 'Electrónica'];
     
-    // Manejadores de eventos //
+    
 
     const manejarCambioArchivo  = (event) => {
         const archivo  = event.target.files[0];
@@ -48,7 +48,7 @@ const UserForm = ({ onClose, formType }) => {
             const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Cantautor",imagenUsuario:nombreArchivo, genero:  { id: indiceGenero } };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
-                // Redirige a /contenido si el registro es exitoso
+                
                 console.log(response.status);
                 navigate('/contenido');
             }
@@ -62,7 +62,7 @@ const UserForm = ({ onClose, formType }) => {
             const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Usuario", genero: null };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
-                // Redirige a /contenido si el registro es exitoso
+                
                 navigate('/contenido');
             }
         } catch (error) {
@@ -74,6 +74,11 @@ const UserForm = ({ onClose, formType }) => {
         await axios.post('http://localhost:8080/api/usuarios/iniciarSesion',  null, {params: {email: email,contrasenia: contrasena}})
         .then(response => {
             console.log('Inicio de sesión exitoso:', response.data);
+            const usuariostorage  = {
+                email: email,
+                nombre: contrasena
+            };
+            sessionStorage.setItem('datosUsuario', JSON.stringify(usuariostorage));
             navigate('/contenido');
         })
         .catch(error => {
@@ -103,7 +108,7 @@ const UserForm = ({ onClose, formType }) => {
     };
 
 
-    
+
 
     return (
         

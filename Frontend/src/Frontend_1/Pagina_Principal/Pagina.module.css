@@ -411,7 +411,7 @@ font-weight: bold;
 
 
 .rounded-button1:hover {
-    background-color: #0056b3; /* Cambia el color al pasar el ratón */
+    background-color: #0056b3;
 }
 
 .titulo{
@@ -435,7 +435,7 @@ font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10vh; /* Asegúrate de que el contenedor ocupe toda la altura de la ventana */
+    height: 10vh;
 }
 
 .aux{
