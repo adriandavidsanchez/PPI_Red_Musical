@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.bad.melody.model.Cancion;
 import com.bad.melody.model.Genero;
 
+
 @Repository
 public interface CancionRepository extends JpaRepository<Cancion, Long> {
     List<Cancion> findTop2ByOrderByIdDesc();

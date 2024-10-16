@@ -198,7 +198,7 @@ export default function Component12() {
           <a style={{ alignItems: 'center' }} className={styles['logo12']}>Bad Melody</a>
         </div>
         <nav className={styles['nav12']}>
-          <a href="#">Generos</a>
+          <a href="#Gen">Generos</a>
         </nav>
       </header>
 
@@ -244,15 +244,12 @@ export default function Component12() {
           </div>
         </section>
       </main>
-      <section className={styles['genres-section12']}>
+      <section id="Gen" className={styles['genres-section12']}>
         <GenresCarousel />
       </section>
       <footer className={styles['footer12']}>
         <span>🎶 Music Platform</span>
         <nav className={styles['footer-nav12']}>
-          <a href="#">Contact</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
         </nav>
       </footer>
     </div>

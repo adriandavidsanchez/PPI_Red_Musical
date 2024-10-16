@@ -49,7 +49,6 @@ const RedesignedComponent = () => {
             });
     }, []);
 
-    console.log(textoCompartido)
     const AlbumClick2 = async (event, variable) => {
         if (event) {
             event.preventDefault();

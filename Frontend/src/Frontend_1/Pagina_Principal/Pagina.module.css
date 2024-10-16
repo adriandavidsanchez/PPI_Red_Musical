@@ -409,6 +409,9 @@ font-weight: bold;
 
 }
 
+.rounded-button:hover {
+    background-color: #29282d;
+}
 
 .rounded-button1:hover {
     background-color: #0056b3;

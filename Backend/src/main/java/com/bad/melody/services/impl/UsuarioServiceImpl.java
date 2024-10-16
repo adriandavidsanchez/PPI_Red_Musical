@@ -84,6 +84,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario obtenerUsuarioPorContacto(Long contacto) {
         return usuarioRepository.findByContacto(contacto);
     }
-
+    
+    @Override
+    public Usuario obtenerUsuarioPorEmail(String email) {
+        // Suponiendo que tienes un repositorio para manejar los usuarios
+        return usuarioRepository.findByEmail(email); // Necesitas implementar este método en tu repositorio
+    }
 }
 

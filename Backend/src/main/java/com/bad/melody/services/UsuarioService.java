@@ -23,5 +23,6 @@ public interface UsuarioService {
     Usuario obtenerUsuarioPorContacto(Long contacto);
     
     List<Usuario> obtenerUltimosDosUsuarios();
+    Usuario obtenerUsuarioPorEmail(String email);
 }
 

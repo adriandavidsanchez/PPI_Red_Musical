@@ -119,4 +119,21 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/contacto-por-email")
+    public ResponseEntity<Long> obtenerContactoPorEmail(@RequestParam String email) {
+        try {
+            // Llama al servicio para obtener el usuario por email
+            Usuario usuario = usuarioServiceImpl.obtenerUsuarioPorEmail(email);
+            if (usuario != null) {
+                return ResponseEntity.ok(usuario.getContacto());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(null); // Retorna 404 si no se encontró el usuario
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null); // Manejo de errores
+        }
+    }
+
 }

@@ -6,6 +6,11 @@ import styles from "./Opcion_Catautor.module.css";
 
 
 export default function Opcion_Cantautor() {
+    const datosRecuperados = JSON.parse(sessionStorage.getItem('datosUsuario'));
+    const contactodelacuenta = `http://localhost:8080/api/usuarios/contacto-por-email?email=${datosRecuperados.email}`;
+
+    
+
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [menuboton, setmenuboton] = useState(false);
@@ -13,7 +18,7 @@ export default function Opcion_Cantautor() {
     const [selectedSongs, setSelectedSongs] = useState([]);
     const [tituloCancion, setTituloCancion] = useState('');
     const [descriptionC, setdescriptionC] = useState('');
-    const [artistaId, setArtistaId] = useState(3101010101);
+    const [artistaId, setArtistaId] = useState(contactodelacuenta);
     const [generoId, setGeneroId] = useState(1);
 
     const [nombreArchivoAudio, setNombreArchivoAudio] = useState('');

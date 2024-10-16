@@ -25,8 +25,6 @@ links.forEach(link => {
     document.body.style.padding = '0';
     document.body.style.fontFamily = 'Arial, sans-serif';
     document.body.style.color = 'white';
-    
-    
     document.body.style.color = 'white';
     document.body.style.transition = 'background-color 0.5s ease';
     
@@ -50,7 +48,7 @@ links.forEach(link => {
             <span className={styles['isotipo1']}>Bad Melody</span>
           </a>
           <div className={styles['menu1']}>
-            <a><span style={{ color: '#007bff' }}>Plans</span></a>
+            <a href="#ventajas1"><span style={{ color: '#007bff' }}>Plans</span></a>
             <a href="#ventajas"><span>Ventajas</span></a>
             <a href="#Musica"><span>Musica</span></a>
           </div>

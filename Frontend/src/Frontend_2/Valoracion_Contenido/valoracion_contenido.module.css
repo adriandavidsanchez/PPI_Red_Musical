@@ -43,9 +43,13 @@
 }
 
 .filled {
-    color: black;
+    color: filled;
 }
-
+.comments-container {
+    max-height: 300px;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
 
 .comments-section {
     margin-bottom: 20px;
@@ -54,6 +58,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
+    
 }
 
 .avatar {
@@ -75,6 +80,9 @@
     width: 100%;
 }
 
+.comment-content {
+    flex: 1;
+}
 
 .review-section {
     margin-bottom: 20px;
