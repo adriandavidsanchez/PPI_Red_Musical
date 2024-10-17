@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { Music } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FileUpload from '../../FileUpload';
 import styles from "./Opcion_Catautor.module.css";
 
-
+const contactodelacuenta = JSON.parse(sessionStorage.getItem('datosUsuario'));
 export default function Opcion_Cantautor() {
-    const datosRecuperados = JSON.parse(sessionStorage.getItem('datosUsuario'));
-    const contactodelacuenta = `http://localhost:8080/api/usuarios/contacto-por-email?email=${datosRecuperados.email}`;
-
+    
+    
+    const [artistaId, setArtistaId] = useState(0);
     
 
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function Opcion_Cantautor() {
     const [selectedSongs, setSelectedSongs] = useState([]);
     const [tituloCancion, setTituloCancion] = useState('');
     const [descriptionC, setdescriptionC] = useState('');
-    const [artistaId, setArtistaId] = useState(contactodelacuenta);
+    
     const [generoId, setGeneroId] = useState(1);
 
     const [nombreArchivoAudio, setNombreArchivoAudio] = useState('');
@@ -28,6 +28,19 @@ export default function Opcion_Cantautor() {
     const [archivoSeleccionadoAudio, setArchivoSeleccionadoAudio] = useState(null);
     const [archivoSeleccionadoVideo, setArchivoSeleccionadoVideo] = useState(null);
     const [archivoSeleccionadoImagen, setArchivoSeleccionadoImagen] = useState(null);
+
+
+    const buscarUsuario = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/usuarios/contacto-por-email?email=${contactodelacuenta.email}`);
+            setArtistaId(response.data);
+        } catch (err) {
+            setArtistaId(null);
+        }
+    };
+    useEffect(() => {
+        buscarUsuario();
+    }, []);
 
     const manejarCambioArchivoAudio = (event) => {
         const archivo = event.target.files[0];
