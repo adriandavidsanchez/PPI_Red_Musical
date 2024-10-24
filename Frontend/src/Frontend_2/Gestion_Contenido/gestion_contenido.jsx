@@ -79,7 +79,6 @@ export default function Component12() {
       try {
         const response = await axios.get(`/api/usuarios/${UltimousuarioId}`);
         const usuario = response.data;
-        console.log("holaaa");
         SetnombreUsuario(usuario.nombre);
         SetGeneroUsuario(usuario.genero.nombreGenero);
         SetimagenUsuario(usuario.imagenUsuario)

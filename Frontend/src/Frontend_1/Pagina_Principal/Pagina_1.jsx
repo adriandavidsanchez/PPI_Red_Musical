@@ -10,10 +10,9 @@ function Pagina_1() {
     setFormType(type);
     setShowForm(true);
   }
+
   useEffect(() => {
 const links = document.querySelectorAll('a');
-
-
 links.forEach(link => {
   link.style.color = 'white';
 });
@@ -39,6 +38,7 @@ links.forEach(link => {
       document.body.style.transition = '';
     };
   }, []);
+
   return (
     <div className={styles['app-container-background']}>
       <header>

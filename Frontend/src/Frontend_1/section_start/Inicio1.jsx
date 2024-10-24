@@ -100,6 +100,9 @@ const UserForm = ({ onClose, formType }) => {
                 registrarCantautor();
             }
         }
+
+        /* Despues de registrarce se limpian los campos */
+
         setnombreUsuario('');
         setEmail('');
         setGenero('');
@@ -219,7 +222,7 @@ const UserForm = ({ onClose, formType }) => {
                                     {esCantautor ? 'Registrarte Como Usuario' : 'Registrarte Como Cantautor'}
                                 </button>
                             </>
-                        )} 
+                        )}
                     </form>
                     <p className={styles['footer-text_ini1']}>
                         Al continuar, aceptas nuestrosㅤ
