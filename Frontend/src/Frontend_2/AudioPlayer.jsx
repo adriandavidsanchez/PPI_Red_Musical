@@ -1,117 +1,118 @@
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import React, { useEffect, useRef, useState } from 'react';
-import { textoCompartidoAudio } from '../Variables';
 import './AudioPlayer.css';
 
 const AudioPlayer = () => {
-  const storage = getStorage();
-  const [fileUrl, setFileUrl] = useState('/src/assets/imagenes/gestion-prueva/dis5.mp3');
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const audioRef = useRef(null);
-  const progressRef = useRef(null);
+  const NombreAudio = JSON.parse(sessionStorage.getItem('NombreCancion'));
+  const almacenamiento = getStorage();
+  
+  const [urlArchivo, setUrlArchivo] = useState('/src/assets/imagenes/gestion-prueva/dis5.mp3');
+  const [estaReproduciendo, setEstaReproduciendo] = useState(false);
+  const [progreso, setProgreso] = useState(0);
+  const [duracionTotal, setDuracionTotal] = useState(0);
+  const [tiempoActual, setTiempoActual] = useState(0);
+  
+  const referenciaAudio = useRef(null);
+  const referenciaProgreso = useRef(null);
 
   useEffect(() => {
-    if (textoCompartidoAudio) {
-      const fileRef1 = ref(storage, `Audio/${textoCompartidoAudio}`);
-      getDownloadURL(fileRef1).then((url) => {
-        setFileUrl(url);
+    if (NombreAudio) {
+      const referenciaArchivo = ref(almacenamiento, `Audio/${NombreAudio}`);
+      getDownloadURL(referenciaArchivo).then((url) => {
+        setUrlArchivo(url);
         console.log('URL de descarga:', url);
       }).catch((error) => {
-        console.error('Error al obtener la URL de descarga:', error);
+        console.error('Error al obtener la URL:', error);
       });
     }
-  }, [textoCompartidoAudio, storage]);
+  }, [NombreAudio, almacenamiento]);
 
-  // Efecto para reiniciar el audio cuando cambia la URL del archivo
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = referenciaAudio.current;
     if (audio) {
-      audio.load();  // Recargar el nuevo archivo de audio
-      setIsPlaying(false);  // Pausar cuando la canción cambie
-      setProgress(0);
-      setCurrentTime(0);
-      setDuration(0);
+      audio.load();
+      setEstaReproduciendo(false);
+      setProgreso(0);
+      setTiempoActual(0);
+      setDuracionTotal(0);
     }
-  }, [fileUrl]);
+  }, [urlArchivo]);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  const formatearTiempo = (tiempo) => {
+    const minutos = Math.floor(tiempo / 60);
+    const segundos = Math.floor(tiempo % 60);
+    return `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
   };
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = referenciaAudio.current;
 
-    const updateProgress = () => {
+    const actualizarProgreso = () => {
       if (audio.duration) {
-        setProgress((audio.currentTime / audio.duration) * 100);
-        setCurrentTime(audio.currentTime);
+        setProgreso((audio.currentTime / audio.duration) * 100);
+        setTiempoActual(audio.currentTime);
       }
     };
 
-    const setAudioDuration = () => setDuration(audio.duration);
+    const establecerDuracion = () => setDuracionTotal(audio.duration);
 
-    audio.addEventListener('timeupdate', updateProgress);
-    audio.addEventListener('loadedmetadata', setAudioDuration);
+    audio.addEventListener('timeupdate', actualizarProgreso);
+    audio.addEventListener('loadedmetadata', establecerDuracion);
 
     return () => {
-      audio.removeEventListener('timeupdate', updateProgress);
-      audio.removeEventListener('loadedmetadata', setAudioDuration);
+      audio.removeEventListener('timeupdate', actualizarProgreso);
+      audio.removeEventListener('loadedmetadata', establecerDuracion);
     };
   }, []);
 
-  const togglePlayPause = () => {
-    const audio = audioRef.current;
+  const alternarReproduccion = () => {
+    const audio = referenciaAudio.current;
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
     }
-    setIsPlaying(!isPlaying);
+    setEstaReproduciendo(!estaReproduciendo);
   };
 
-  const handleProgressClick = (e) => {
-    const progressBar = progressRef.current;
-    const rect = progressBar.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const newProgress = (clickX / rect.width) * 100;
-    const audio = audioRef.current;
-    audio.currentTime = (newProgress / 100) * audio.duration;
-    setProgress(newProgress);
+  const manejarClicProgreso = (e) => {
+    const barraProgreso = referenciaProgreso.current;
+    const rectangulo = barraProgreso.getBoundingClientRect();
+    const clicX = e.clientX - rectangulo.left;
+    const nuevoProgreso = (clicX / rectangulo.width) * 100;
+    const audio = referenciaAudio.current;
+    audio.currentTime = (nuevoProgreso / 100) * audio.duration;
+    setProgreso(nuevoProgreso);
   };
 
-  const handleDrag = (e) => {
-    handleProgressClick(e); // Permite mover el círculo al arrastrarlo
+  const manejarArrastre = (e) => {
+    manejarClicProgreso(e);
   };
 
   return (
-    <div className="audio-player">
-      <audio ref={audioRef}>
-        <source src={fileUrl} type="audio/mp3" />
-        Your browser does not support the audio element.
+    <div className="reproductor-audio">
+      <audio ref={referenciaAudio} src={urlArchivo}>
+        Tu navegador no soporta el elemento de audio.
       </audio>
-      <button onClick={togglePlayPause} className="play-pause-button">
-        {isPlaying ? 'Pause' : 'Play'}
+
+      <button onClick={alternarReproduccion}>
+        {estaReproduciendo ? 'Pausar' : 'Reproducir'}
       </button>
-      <div
-        className="progress-bar"
-        ref={progressRef}
-        onClick={handleProgressClick}
-        onMouseMove={(e) => e.buttons === 1 && handleDrag(e)}
+
+      <div 
+        className="barra-progreso"
+        ref={referenciaProgreso}
+        onClick={manejarClicProgreso}
+        onDrag={manejarArrastre}
       >
-        <div className="progress" style={{ width: `${progress}%` }}></div>
-        <div
-          className="progress-circle"
-          style={{ left: `calc(${progress}% - 7px)` }} // Posiciona el círculo
-        ></div>
+        <div 
+          className="progreso"
+          style={{ width: `${progreso}%` }}
+        />
       </div>
-      <div className="time-info">
-        <span>{formatTime(currentTime)}</span>
-        <span>{formatTime(duration)}</span>
+
+      <div className="mostrar-tiempo">
+        {formatearTiempo(tiempoActual)} / {formatearTiempo(duracionTotal)}
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { setTextoCompartido } from '../../Variables.jsx';
 import styles from './Carrucel.module.css';
 
 
@@ -23,6 +22,8 @@ const chunkArray = (array, size) => {
 };
 
 const GenresCarousel = () => {
+
+  
   
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const GenresCarousel = () => {
 
   const handleCardClick = (genre) => {
     console.log(`Clicked on: ${genre}`);
-    setTextoCompartido(genre)
+    sessionStorage.setItem('Genero', JSON.stringify(genre));
     navigate('/detalle');
     
   };

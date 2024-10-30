@@ -26,7 +26,7 @@ const UserForm = ({ onClose, formType }) => {
     const manejarCambioArchivo  = (event) => {
         const archivo  = event.target.files[0];
         setArchivoSeleccionado(archivo );
-        setNombreArchivo(archivo  ? archivo .name : '');
+        setNombreArchivo(archivo  ? archivo.name : '');
     };
 
     const manejarCambioGenero  = (e) => {
