@@ -2,6 +2,16 @@
 
 Esta aplicación web permite a los usuarios (cantautores) subir y compartir sus canciones, así como escuchar las canciones de otros usuarios.
 
+## todas las dependencias que se solicitan para el Frontend
+
+* npm install react-router-dom
+* npm install axios
+* npm install firebase
+* npm install styled-components
+* npm install bootstrap
+* npm install react-bootstrap
+* npm install lucide-react
+
 ## Estructura de la base de datos
 
 La aplicación cuenta con las siguientes tablas en la base de datos MySQL:
