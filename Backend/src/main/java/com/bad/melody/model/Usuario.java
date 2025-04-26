@@ -51,4 +51,6 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "id_Usuario_Genero")
     private Genero genero;
+
+    private ListaReproducion listaReproduccion;
 }

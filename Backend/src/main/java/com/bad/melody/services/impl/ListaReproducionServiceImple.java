@@ -6,13 +6,18 @@ import org.springframework.stereotype.Service;
 import com.bad.melody.model.Cancion;
 import com.bad.melody.model.ListaReproduccionCancion;
 import com.bad.melody.model.ListaReproducion;
+import com.bad.melody.model.Usuario;
 import com.bad.melody.repository.CancionRepository;
 import com.bad.melody.repository.ListaReproducionCancionRepository;
 import com.bad.melody.repository.ListaReproducionRepository;
+import com.bad.melody.repository.UsuarioRepository;
 import com.bad.melody.services.ListaReproducionService;
 
 @Service
 public class ListaReproducionServiceImple implements ListaReproducionService {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private CancionRepository cancionRepository;
@@ -46,6 +51,28 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
                 .orElseThrow(() -> new RuntimeException("Relación no encontrada"));
 
         listaReproducionCancionRepository.delete(relacion);
+    }
+
+    @Override
+    public ListaReproducion crearLista(Long idUsuario, String nombreLista) {
+        // Verificar si el usuario existe
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    // Verificar si el usuario ya tiene lista de reproducción
+    // (asumiendo que un usuario solo puede tener una lista de reproducción)
+    // Si el usuario ya tiene una lista, lanzar una excepción
+    if (usuario.getListaReproduccion() != null) {
+        throw new RuntimeException("El usuario ya tiene una lista de reproducción.");
+    }
+
+    // Crear nueva lista de reproducción
+    ListaReproducion lista = new ListaReproducion();
+    lista.setNombreListaReproduccion(nombreLista);
+    lista.setUsuarioListaReproducion(usuario);
+
+    // Guardar en la base de datos
+    return listaReproducionRepository.save(lista);
     }
 
 }
