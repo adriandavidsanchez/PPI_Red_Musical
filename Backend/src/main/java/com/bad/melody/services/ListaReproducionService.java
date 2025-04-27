@@ -1,6 +1,6 @@
 package com.bad.melody.services;
 
-import com.bad.melody.model.ListaReproducion;
+import com.bad.melody.model.ListaReproduccion;
 
 public interface ListaReproducionService {
 
@@ -8,5 +8,5 @@ public interface ListaReproducionService {
 
     public void eliminarCancion(Long idLista, Long idCancion);
 
-    public ListaReproducion crearLista(Long idUsuario, String nombreLista);
+    public ListaReproduccion crearLista(Long idUsuario, String nombreLista);
 }

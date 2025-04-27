@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bad.melody.model.Cancion;
+import com.bad.melody.model.ListaReproduccion;
 import com.bad.melody.model.ListaReproduccionCancion;
-import com.bad.melody.model.ListaReproducion;
 import com.bad.melody.model.Usuario;
 import com.bad.melody.repository.CancionRepository;
 import com.bad.melody.repository.ListaReproducionCancionRepository;
@@ -30,7 +30,7 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
 
     @Override
     public void agregarCancion(Long idLista, Long idCancion) {
-        ListaReproducion lista = listaReproducionRepository.findById(idLista)
+        ListaReproduccion lista = listaReproducionRepository.findById(idLista)
                 .orElseThrow(() -> new RuntimeException("Lista no encontrada"));
         Cancion cancion = cancionRepository.findById(idCancion)
                 .orElseThrow(() -> new RuntimeException("Canción no encontrada"));
@@ -54,7 +54,7 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
     }
 
     @Override
-    public ListaReproducion crearLista(Long idUsuario, String nombreLista) {
+    public ListaReproduccion crearLista(Long idUsuario, String nombreLista) {
         // Verificar si el usuario existe
         Usuario usuario = usuarioRepository.findById(idUsuario)
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -67,7 +67,7 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
     }
 
     // Crear nueva lista de reproducción
-    ListaReproducion lista = new ListaReproducion();
+    ListaReproduccion lista = new ListaReproduccion();
     lista.setNombreListaReproduccion(nombreLista);
     lista.setUsuarioListaReproducion(usuario);
 

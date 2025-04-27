@@ -52,5 +52,5 @@ public class Usuario {
     @JoinColumn(name = "id_Usuario_Genero")
     private Genero genero;
 
-    private ListaReproducion listaReproduccion;
+    private ListaReproduccion listaReproduccion;
 }
