@@ -18,29 +18,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name = "tblListaReproduccion")
+@Table(name = "tblLista")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ListaReproduccion {
+public class Lista {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idListaReproduccion;
+    private Long idLista;
 
-    @Column(name = "nombreListaReproduccion", nullable = false)
-    private String nombreListaReproduccion;
+    @Column(name = "nombreLista", nullable = false)
+    private String nombreLista;
 
-    @Column(name = "fechaCreacionListaReproduccion", nullable = false, updatable = false)
-    private LocalDateTime fechaCreacionListaReproducion = LocalDateTime.now();
+    @Column(name = "fechaCreacionLista", nullable = false, updatable = false)
+    private LocalDateTime fechaCreacionLista = LocalDateTime.now();
 
     @OneToOne
     @JoinColumn(name = "id_UsuarioListaReproduccion")
     private Usuario usuarioListaReproducion;
 
-    @OneToMany(mappedBy = "listaReproduccionLista", cascade = { CascadeType.PERSIST, CascadeType.MERGE }) 
+    @OneToMany(mappedBy = "lista", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<ListaReproduccionCancion> canciones = new ArrayList<>();
 
 }

@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bad.melody.model.Cancion;
-import com.bad.melody.model.ListaReproduccion;
+import com.bad.melody.model.Lista;
 import com.bad.melody.model.ListaReproduccionCancion;
-import com.bad.melody.model.Usuario;
 import com.bad.melody.repository.CancionRepository;
 import com.bad.melody.repository.ListaReproducionCancionRepository;
 import com.bad.melody.repository.ListaReproducionRepository;
@@ -30,46 +29,46 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
 
     @Override
     public void agregarCancion(Long idLista, Long idCancion) {
-        ListaReproduccion lista = listaReproducionRepository.findById(idLista)
+        Lista lista = listaReproducionRepository.findById(idLista)
                 .orElseThrow(() -> new RuntimeException("Lista no encontrada"));
         Cancion cancion = cancionRepository.findById(idCancion)
                 .orElseThrow(() -> new RuntimeException("Canción no encontrada"));
 
         ListaReproduccionCancion relacion = new ListaReproduccionCancion();
-        relacion.setListaReproduccionLista(lista);
+        relacion.setLista(lista);
         relacion.setCancionListaReproduccion(cancion);
 
-        lista.getCanciones().add(relacion);
-        listaReproducionRepository.save(lista);
+        //lista.getCanciones().add(relacion);
+        //listaReproducionRepository.save(lista);
         
     }
 
-    @Override
+    /*@Override
     public void eliminarCancion(Long idLista, Long idCancion) {
         ListaReproduccionCancion relacion = listaReproducionCancionRepository
                 .findByLista_IdAndCancion_Id(idLista, idCancion)
                 .orElseThrow(() -> new RuntimeException("Relación no encontrada"));
 
         listaReproducionCancionRepository.delete(relacion);
-    }
+    }*/
 
     @Override
-    public ListaReproduccion crearLista(Long idUsuario, String nombreLista) {
+    public Lista crearLista(Long idUsuario, String nombreLista) {
         // Verificar si el usuario existe
-        Usuario usuario = usuarioRepository.findById(idUsuario)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        //Usuario usuario = usuarioRepository.findById(idUsuario)
+        //    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
     // Verificar si el usuario ya tiene lista de reproducción
     // (asumiendo que un usuario solo puede tener una lista de reproducción)
     // Si el usuario ya tiene una lista, lanzar una excepción
-    if (usuario.getListaReproduccion() != null) {
+    /*if (usuario.getLista() != null) {
         throw new RuntimeException("El usuario ya tiene una lista de reproducción.");
-    }
+    }*/
 
     // Crear nueva lista de reproducción
-    ListaReproduccion lista = new ListaReproduccion();
-    lista.setNombreListaReproduccion(nombreLista);
-    lista.setUsuarioListaReproducion(usuario);
+    Lista lista = new Lista();
+    lista.setNombreLista(nombreLista);
+    //lista.setUsuarioListaReproducion(usuario);
 
     // Guardar en la base de datos
     return listaReproducionRepository.save(lista);

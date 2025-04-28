@@ -27,8 +27,8 @@ public class ListaReproduccionCancion {
     private Cancion cancionListaReproduccion;
 
     @ManyToOne
-    @JoinColumn(name = "id_listaReproduccionLista")
-    private ListaReproduccion listaReproduccionLista;
-
+    @JoinColumn(name = "lista")
+    private Lista lista;
+    
     
 }
