@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -35,11 +34,10 @@ public class Lista {
     @Column(name = "fechaCreacionLista", nullable = false, updatable = false)
     private LocalDateTime fechaCreacionLista = LocalDateTime.now();
 
-    @OneToOne
-    @JoinColumn(name = "id_UsuarioListaReproduccion")
+    @OneToOne(mappedBy = "listaUsuario")
     private Usuario usuarioListaReproducion;
 
-    @OneToMany(mappedBy = "lista", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @OneToMany(mappedBy = "listaReproduccion", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<ListaReproduccionCancion> canciones = new ArrayList<>();
 
 }

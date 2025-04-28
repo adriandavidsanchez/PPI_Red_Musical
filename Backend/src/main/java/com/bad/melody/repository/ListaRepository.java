@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.bad.melody.model.Lista;
 
 @Repository
-public interface ListaReproducionRepository extends JpaRepository<Lista, Long> {
+public interface ListaRepository extends JpaRepository<Lista, Long> {
     // Aquí puedes agregar métodos personalizados si es necesario
 
 }

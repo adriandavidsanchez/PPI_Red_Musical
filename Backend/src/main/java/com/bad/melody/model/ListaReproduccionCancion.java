@@ -28,7 +28,5 @@ public class ListaReproduccionCancion {
 
     @ManyToOne
     @JoinColumn(name = "lista")
-    private Lista lista;
-    
-    
+    private Lista listaReproduccion;
 }

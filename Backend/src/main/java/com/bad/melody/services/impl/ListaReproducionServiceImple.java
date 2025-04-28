@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.bad.melody.model.Cancion;
 import com.bad.melody.model.Lista;
 import com.bad.melody.model.ListaReproduccionCancion;
+import com.bad.melody.model.Usuario;
 import com.bad.melody.repository.CancionRepository;
+import com.bad.melody.repository.ListaRepository;
 import com.bad.melody.repository.ListaReproducionCancionRepository;
-import com.bad.melody.repository.ListaReproducionRepository;
 import com.bad.melody.repository.UsuarioRepository;
 import com.bad.melody.services.ListaReproducionService;
 
@@ -22,7 +23,7 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
     private CancionRepository cancionRepository;
 
     @Autowired
-    private ListaReproducionRepository listaReproducionRepository;
+    private ListaRepository listaReproducionRepository;
 
     @Autowired
     private ListaReproducionCancionRepository listaReproducionCancionRepository;
@@ -35,40 +36,40 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
                 .orElseThrow(() -> new RuntimeException("Canción no encontrada"));
 
         ListaReproduccionCancion relacion = new ListaReproduccionCancion();
-        relacion.setLista(lista);
+        relacion.setListaReproduccion(lista);
         relacion.setCancionListaReproduccion(cancion);
 
-        //lista.getCanciones().add(relacion);
-        //listaReproducionRepository.save(lista);
+        lista.getCanciones().add(relacion);
+        listaReproducionRepository.save(lista);
         
     }
 
-    /*@Override
+    @Override
     public void eliminarCancion(Long idLista, Long idCancion) {
         ListaReproduccionCancion relacion = listaReproducionCancionRepository
-                .findByLista_IdAndCancion_Id(idLista, idCancion)
+                .findByListaReproduccion_IdListaAndCancionListaReproduccion_Id(idLista, idCancion)
                 .orElseThrow(() -> new RuntimeException("Relación no encontrada"));
 
         listaReproducionCancionRepository.delete(relacion);
-    }*/
+    }
 
     @Override
     public Lista crearLista(Long idUsuario, String nombreLista) {
         // Verificar si el usuario existe
-        //Usuario usuario = usuarioRepository.findById(idUsuario)
-        //    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
     // Verificar si el usuario ya tiene lista de reproducción
     // (asumiendo que un usuario solo puede tener una lista de reproducción)
     // Si el usuario ya tiene una lista, lanzar una excepción
-    /*if (usuario.getLista() != null) {
+    if (usuario.getListaUsuario() != null) {
         throw new RuntimeException("El usuario ya tiene una lista de reproducción.");
-    }*/
+    }
 
     // Crear nueva lista de reproducción
     Lista lista = new Lista();
     lista.setNombreLista(nombreLista);
-    //lista.setUsuarioListaReproducion(usuario);
+    lista.setUsuarioListaReproducion(usuario);
 
     // Guardar en la base de datos
     return listaReproducionRepository.save(lista);
