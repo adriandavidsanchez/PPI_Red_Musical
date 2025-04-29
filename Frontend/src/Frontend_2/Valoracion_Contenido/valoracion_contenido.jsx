@@ -117,10 +117,10 @@ function Valoracion() {
     return (
         <div className={styles['container']}>
             <div className={styles['video-container']}>
-                <img 
-                    src={datosCancion.imageUrl} 
-                    style={{ width: '760px' }} 
-                    alt="Portada del álbum" 
+                <img
+                    src={datosCancion.imageUrl}
+                    style={{ width: '760px' }}
+                    alt="Portada del álbum"
                 />
                 <AudioPlayer />
                 <div className={styles['video-info']}>

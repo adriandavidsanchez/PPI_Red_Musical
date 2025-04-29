@@ -5,15 +5,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import GenresCarousel from './Carrucel';
 import styles from './gestion_contenido.module.css';
+import Opcion_Cantautor from '../Seleccion_Contenido/Opcion_Catautor';
 
 const storage = getStorage();
 
 export default function Component12() {
   useEffect(() => {
-    
+
     document.body.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif';
     document.body.style.padding = '0px';
-    
+
   }, []);
 
   const [UltimousuarioId, SetUltimousuarioId] = useState(null);
@@ -50,7 +51,7 @@ export default function Component12() {
 
   const obtenerUltimosusuarios = async () => {
     try {
-      
+
       const response = await axios.get('http://localhost:8080/api/usuarios/ultimos-dos');
       const [id1, id2] = response.data;
       SetUltimousuarioId(id1);
@@ -68,7 +69,7 @@ export default function Component12() {
         SetnombreUsuario2(usuario.nombre);
         SetGeneroUsuario2(usuario.genero.nombreGenero);
         SetimagenUsuario2(usuario.imagenUsuario)
-        
+
       } catch (error) {
         console.error('Error al obtener la canción:', error);
       }
@@ -92,7 +93,7 @@ export default function Component12() {
   useEffect(() => {
     const obtenerUltimasCanciones = async () => {
       try {
-        
+
         const response = await axios.get('http://localhost:8080/api/canciones/ultimas-dos');
         const [id1, id2] = response.data;
         setUltimaCancionId(id1);
@@ -133,7 +134,7 @@ export default function Component12() {
         }
       }
     };
-    
+
 
     obtenerUltimosusuarios();
     obtenerUltimasCanciones();
@@ -197,7 +198,7 @@ export default function Component12() {
           <a style={{ alignItems: 'center' }} className={styles['logo12']}>Bad Melody</a>
         </div>
         <nav className={styles['nav12']}>
-          <a href="#Gen">Generos</a>
+          <Opcion_Cantautor />
         </nav>
       </header>
 
@@ -206,13 +207,13 @@ export default function Component12() {
           <div className={styles['featured-artists12']}>
             <div className={styles['artists-grid12']}>
               <div className={styles['artist12']}>
-                <h2 style={{ marginRight: '80px', marginBottom: '30px'}}>Nuevos Artistas</h2>
-                <img src={fileUrl3} style={{filter: "grayscale(60%)"}} alt="Artist Name" />
+                <h2 style={{ marginRight: '80px', marginBottom: '30px' }}>Nuevos Artistas</h2>
+                <img src={fileUrl3} style={{ filter: "grayscale(60%)" }} alt="Artist Name" />
                 <h3>{nombreUsuario}</h3>
                 <p>{GeneroUsuario}</p>
               </div>
               <div className={styles['artist12']} style={{ marginTop: '66px' }}>
-                <img style={{ paddingLeft: '30px',filter: "grayscale(60%)"}} src={fileUrl4} alt="Artist Name" />
+                <img style={{ paddingLeft: '30px', filter: "grayscale(60%)" }} src={fileUrl4} alt="Artist Name" />
                 <h3>{nombreUsuario2}</h3>
                 <p>{GeneroUsuario2}</p>
               </div>
