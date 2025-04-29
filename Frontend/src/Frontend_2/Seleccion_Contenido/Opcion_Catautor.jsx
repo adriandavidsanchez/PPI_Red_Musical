@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { Music } from "lucide-react";
+import { Music, Trash2, LogOut } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import FileUpload from '../../FileUpload';
 import styles from "./Opcion_Catautor.module.css";
 
@@ -14,7 +15,7 @@ export default function Opcion_Cantautor() {
     const [tituloCancion, setTituloCancion] = useState('');
     const [descriptionC, setdescriptionC] = useState('');
     const [generoId, setGeneroId] = useState(1);
-    
+
     const [nombreArchivoAudio, setNombreArchivoAudio] = useState('');
     const [nombreArchivoImagen, setNombreArchivoImagen] = useState('');
     const [nombreArchivoVideo, setNombreArchivoVideo] = useState('');
@@ -22,6 +23,8 @@ export default function Opcion_Cantautor() {
     const [archivoSeleccionadoAudio, setArchivoSeleccionadoAudio] = useState(null);
     const [archivoSeleccionadoVideo, setArchivoSeleccionadoVideo] = useState(null);
     const [archivoSeleccionadoImagen, setArchivoSeleccionadoImagen] = useState(null);
+
+    const navigate = useNavigate(); // 👈 aquí usamos navigate
 
     const buscarUsuario = async () => {
         try {
@@ -41,13 +44,13 @@ export default function Opcion_Cantautor() {
         setArchivoSeleccionadoAudio(archivo);
         setNombreArchivoAudio(archivo ? archivo.name : '');
     };
-    
+
     const manejarCambioArchivoVideo = (event) => {
         const archivo = event.target.files[0];
         setArchivoSeleccionadoVideo(archivo);
         setNombreArchivoVideo(archivo ? archivo.name : '');
     };
-    
+
     const manejarCambioArchivoImagen = (event) => {
         const archivo = event.target.files[0];
         setArchivoSeleccionadoImagen(archivo);
@@ -98,15 +101,35 @@ export default function Opcion_Cantautor() {
         }
     };
 
+    const eliminarCancion = () => {
+        alert('Función de eliminar canción aún no implementada.');
+        menu();
+    };
+
+    const cerrarSesion = () => {
+        sessionStorage.clear();
+        navigate('/'); // 👈 redirigimos al login principal
+    };
+
     return (
         <div className={styles['music-menu']}>
             <div className={styles['dropdown']}>
-                <button className={styles['dropdown-trigger']} onClick={menu}>Menú de Música</button>
+                <button className={styles['dropdown-trigger']} onClick={menu}>
+                    <img id="logoutImage" src="src/assets/imagenes/Gestion-prueva/12.png" width="35px" height="35px" alt="Menú de opciones" style={{ cursor: 'pointer' }} />
+                </button>
                 {menuboton && (
                     <div className={styles['dropdown-content']}>
                         <button onClick={() => { setIsAddDialogOpen(true); menu(); }}>
                             <Music className={styles['icon']} />
                             <span>Subir Canción</span>
+                        </button>
+                        <button onClick={eliminarCancion}>
+                            <Trash2 className={styles['icon']} />
+                            <span>Eliminar Canción</span>
+                        </button>
+                        <button onClick={cerrarSesion}>
+                            <LogOut className={styles['icon']} />
+                            <span>Cerrar Sesión</span>
                         </button>
                     </div>
                 )}
