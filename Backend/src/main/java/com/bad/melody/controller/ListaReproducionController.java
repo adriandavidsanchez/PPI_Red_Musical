@@ -15,7 +15,7 @@ import com.bad.melody.services.impl.ListaReproducionServiceImple;
 
 
 @RestController
-@RequestMapping("/lista")
+@RequestMapping("/api/listaReproduccion")
 public class ListaReproducionController {
 
     @Autowired
