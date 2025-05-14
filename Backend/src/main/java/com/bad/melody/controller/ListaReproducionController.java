@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class ListaReproducionController {
     private ListaReproducionServiceImple listaReproducionServiceImpl;
 
     @PostMapping("/{idLista}/agregar/{idCancion}")
-    public ResponseEntity<String> agregarCancion(Long idLista, Long idCancion) {
+    public ResponseEntity<String> agregarCancion(@PathVariable Long idLista, @PathVariable Long idCancion) {
         try {
             listaReproducionServiceImpl.agregarCancion(idLista, idCancion);
             return ResponseEntity.ok("Canción agregada a la lista de reproducción");
@@ -32,7 +33,7 @@ public class ListaReproducionController {
     }
 
     @DeleteMapping("/{idLista}/eliminar/{idCancion}")
-    public ResponseEntity<String> eliminarCancion(Long idLista, Long idCancion) {
+    public ResponseEntity<String> eliminarCancion(@PathVariable Long idLista, @PathVariable Long idCancion) {
         try {
             listaReproducionServiceImpl.eliminarCancion(idLista, idCancion);
             return ResponseEntity.ok("Canción eliminada de la lista de reproducción");
