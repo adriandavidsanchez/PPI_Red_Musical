@@ -1,8 +1,11 @@
+// Lista.java
 package com.bad.melody.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,9 +22,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tblLista")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class Lista {
 
     @Id
@@ -35,9 +38,9 @@ public class Lista {
     private LocalDateTime fechaCreacionLista = LocalDateTime.now();
 
     @OneToOne(mappedBy = "listaUsuario")
+    @JsonBackReference
     private Usuario usuarioListaReproducion;
 
     @OneToMany(mappedBy = "listaReproduccion", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<ListaReproduccionCancion> canciones = new ArrayList<>();
-
 }

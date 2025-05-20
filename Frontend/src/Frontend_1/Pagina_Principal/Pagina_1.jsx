@@ -113,13 +113,13 @@ links.forEach(link => {
                     <text className={styles.letter} x="751.257" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>e</text>
                 </g>
                 <g className={styles['animate-33']}>
-                    <text className={styles.letter} x="813.931" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>d</text>
+                    <text className={styles.letter} x="813.931" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>l</text>
                 </g>
                 <g className={styles['animate-44']}>
                     <text className={styles.letter} x="876.603" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>o</text>
                 </g>
                 <g className={styles['animate-55']}>
-                    <text className={styles.letter} x="939.277" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>l</text>
+                    <text className={styles.letter} x="939.277" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>d</text>
                 </g>
                 <g className={styles['animate-66']}>
                     <text className={styles.letter} x="1001.95" y="187.786" dominantBaseline="middle" textAnchor="middle" fill="white" style={{ fontSize: '80px' }}>y</text>

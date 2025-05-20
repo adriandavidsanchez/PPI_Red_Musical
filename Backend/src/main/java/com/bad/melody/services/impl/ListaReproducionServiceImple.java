@@ -13,6 +13,9 @@ import com.bad.melody.repository.ListaReproducionCancionRepository;
 import com.bad.melody.repository.UsuarioRepository;
 import com.bad.melody.services.ListaReproducionService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ListaReproducionServiceImple implements ListaReproducionService {
 
@@ -55,24 +58,33 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
 
     @Override
     public Lista crearLista(Long idUsuario, String nombreLista) {
-        // Verificar si el usuario existe
-        Usuario usuario = usuarioRepository.findById(idUsuario)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    Usuario usuario = usuarioRepository.findById(idUsuario)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-    // Verificar si el usuario ya tiene lista de reproducción
-    // (asumiendo que un usuario solo puede tener una lista de reproducción)
-    // Si el usuario ya tiene una lista, lanzar una excepción
-    if (usuario.getListaUsuario() != null) {
-        throw new RuntimeException("El usuario ya tiene una lista de reproducción.");
-    }
-
-    // Crear nueva lista de reproducción
     Lista lista = new Lista();
     lista.setNombreLista(nombreLista);
-    lista.setUsuarioListaReproducion(usuario);
 
-    // Guardar en la base de datos
-    return listaReproducionRepository.save(lista);
+    // 1) Asocia ambas entidades
+    lista.setUsuarioListaReproducion(usuario);
+    usuario.setListaUsuario(lista);
+
+    // 2) Guarda al usuario (gracias a CascadeType.ALL también se persiste la lista)
+    usuarioRepository.save(usuario);
+
+    return lista;
+}
+    @Override
+    public List<Cancion> obtenerCancionesPorUsuario(Long idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Lista lista = usuario.getListaUsuario();
+        if (lista == null) {
+            throw new RuntimeException("El usuario no tiene lista creada");
+        }
+        // obtiene las entidades intermedias y extrae solo las Cancion
+        return lista.getCanciones().stream()
+                    .map(ListaReproduccionCancion::getCancionListaReproduccion)
+                    .collect(Collectors.toList());
     }
 
 }

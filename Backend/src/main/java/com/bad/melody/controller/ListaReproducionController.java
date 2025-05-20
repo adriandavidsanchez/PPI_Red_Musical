@@ -1,15 +1,19 @@
 package com.bad.melody.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bad.melody.model.Cancion;
 import com.bad.melody.model.Lista;
 import com.bad.melody.services.impl.ListaReproducionServiceImple;
 
@@ -51,5 +55,11 @@ public class ListaReproducionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
         }
+    }
+
+        @GetMapping("/usuario/{idUsuario}/canciones")
+    public ResponseEntity<List<Cancion>> getCancionesPorUsuario(@PathVariable Long idUsuario) {
+        List<Cancion> canciones = listaReproducionServiceImpl.obtenerCancionesPorUsuario(idUsuario);
+        return ResponseEntity.ok(canciones);
     }
 }

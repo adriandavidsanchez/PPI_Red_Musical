@@ -43,9 +43,12 @@ const UserForm = ({ onClose, formType }) => {
 
     const registrarCantautor  = async () => {
 
-        FileUpload({ folderName: 'Audio', file: archivoSeleccionado });
+        
+        FileUpload({ folderName: 'Imagen', file: archivoSeleccionado });
         try {
-            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Cantautor",imagenUsuario:nombreArchivo, genero:  { id: indiceGenero } };
+            console.log("genero0'0: ",indiceGenero);
+            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Cantautor",imagenUsuario:nombreArchivo, id_Usuario_Genero: { id: indiceGenero }};
+            console.log(NewCataut);
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
                 
@@ -59,7 +62,7 @@ const UserForm = ({ onClose, formType }) => {
     
     const registrarUsuario  = async () => {
         try {
-            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Usuario", genero: null };
+            const NewCataut = { nombre: nombreUsuario, contacto: Number(contacto), email: email, contrasenia: contrasena, rol: "Usuario" };
             const response = await axios.post('http://localhost:8080/api/usuarios/registrarse', NewCataut, { withCredentials: true });
             if (response.status === 201) {
                 

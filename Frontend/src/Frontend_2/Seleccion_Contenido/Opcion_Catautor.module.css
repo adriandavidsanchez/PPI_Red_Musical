@@ -70,6 +70,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .dialog-content {
@@ -83,6 +84,18 @@ body{
     padding-top: 16px;
 }
 
+.dialog-content1 {
+    position: absolute;
+    z-index: 5;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    padding-right: 52px;
+    border: 1px solid #ccc;
+    padding-top: 16px;
+}
 .form-group {
     margin-bottom: 1rem;
 }
@@ -142,6 +155,16 @@ input[type="file"]::file-selector-button {
 }
 .close-button{
     margin-left: 230px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 34px;
+    display: flex;
+    flex-direction: column;
+}
+.close-button1{
+    margin-left: 180px;
     border-radius: 5px;
     background-color: white;
     border: none;

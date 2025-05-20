@@ -1,4 +1,7 @@
+// Genero.java
 package com.bad.melody.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,11 +13,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Género musical. Ignoramos la lista de canciones para evitar ciclos
+ * o campos innecesarios al serializar.
+ */
 @Entity
 @Table(name = "tblGeneros")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({ "canciones" })
 public class Genero {
 
     @Id

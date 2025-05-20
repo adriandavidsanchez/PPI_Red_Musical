@@ -1,7 +1,12 @@
+// Usuario.java
 package com.bad.melody.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,11 +21,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Usuario de la aplicación. Ignoramos la relación
+ * listaUsuario al serializar esta clase anidada.
+ */
 @Entity
 @Table(name = "tblUsuarios")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({ "listaUsuario" })
 public class Usuario {
 
     @NotBlank
@@ -43,18 +53,18 @@ public class Usuario {
     @Column(name = "rol")
     private String rol;
 
-    @Column(name =  "imagenUsuario")
+    @Column(name = "imagenUsuario")
     private String imagenUsuario;
 
     @Column(name = "fechaSubidaCancion", nullable = false, updatable = false)
     private LocalDateTime fechaCreacionUsuario = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "id_Usuario_Genero")
+    @JoinColumn(name = "genero")
     private Genero genero;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_ListaUsuario")
+    @JsonManagedReference
     private Lista listaUsuario;
-
 }
