@@ -199,4 +199,32 @@ tbody tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 }
 
+.favorite-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
 
+.favorite-button:hover {
+    background-color: #005bff;
+    transform: scale(1.05);
+}
+
+.favorite-active {
+    background-color: #e74c3c;
+}
+
+.favorite-active:hover {
+    background-color: #ff6b6b;
+}
+
+.favorite-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

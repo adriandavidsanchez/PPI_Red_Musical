@@ -87,4 +87,27 @@ public class ListaReproducionServiceImple implements ListaReproducionService {
                     .collect(Collectors.toList());
     }
 
+
+ @Override
+    public boolean existeCancionEnListaPorEmail(String email, Long idCancion) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null || usuario.getListaUsuario() == null) {
+            return false;
+        }
+        return usuario.getListaUsuario()
+                      .getCanciones()
+                      .stream()
+                      .anyMatch(r -> r.getCancionListaReproduccion().getId().equals(idCancion));
+    }
+
+
+    @Override
+    public Lista obtenerListaPorUsuario(Long idUsuario) {
+    Usuario usuario = usuarioRepository.findById(idUsuario)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    return usuario.getListaUsuario(); // puede devolver null si no tiene lista
+}
+
+
 }

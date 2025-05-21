@@ -45,21 +45,59 @@ public class ListaReproducionController {
             return ResponseEntity.status(500).body("Error al eliminar la canción: " + e.getMessage());
         }
     }
-
-    @PostMapping("/crear")
-    public ResponseEntity<Lista> crearLista(@RequestParam Long idUsuario, @RequestParam String nombreLista) {
-        try {
-            Lista lista = listaReproducionServiceImpl.crearLista(idUsuario, nombreLista);
-            return ResponseEntity.status(HttpStatus.CREATED).body(lista);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
+@PostMapping("/crear")
+public ResponseEntity<?> crearLista(@RequestParam Long idUsuario,@RequestParam String nombreLista) {
+    try {
+        // 1️⃣ Compruebo si ya tiene lista:
+        Lista existente = listaReproducionServiceImpl.obtenerListaPorUsuario(idUsuario);
+        if (existente != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("El usuario ya tiene una lista de reproducción.");
         }
+        
+        // 2️⃣ Si no existe, la creo:
+        Lista nueva = listaReproducionServiceImpl.crearLista(idUsuario, nombreLista);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(nueva);
+        
+    } catch (RuntimeException e) {
+        // Podría venir de "Usuario no encontrado", etc.
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error inesperado: " + e.getMessage());
     }
+}
 
         @GetMapping("/usuario/{idUsuario}/canciones")
     public ResponseEntity<List<Cancion>> getCancionesPorUsuario(@PathVariable Long idUsuario) {
         List<Cancion> canciones = listaReproducionServiceImpl.obtenerCancionesPorUsuario(idUsuario);
         return ResponseEntity.ok(canciones);
     }
+
+
+
+
+// en ListaReproducionController.java (junto al resto de @GetMapping)
+@GetMapping("/usuario/{idUsuario}")
+public ResponseEntity<Lista> obtenerListaUsuario(@PathVariable Long idUsuario) {
+    try {
+        Lista lista = listaReproducionServiceImpl.obtenerListaPorUsuario(idUsuario);
+        if (lista == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(lista);
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+}
+
+
 }

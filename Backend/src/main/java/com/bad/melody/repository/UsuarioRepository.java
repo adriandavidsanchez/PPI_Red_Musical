@@ -31,4 +31,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     void deleteCancionesByUsuarioId(@Param("usuarioId") Long usuarioId);
 
     List<Usuario> findTop2ByOrderByContactoDesc();
+
 }

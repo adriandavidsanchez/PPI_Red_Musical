@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AudioPlayer from '../AudioPlayer';
 import Opcion_Cantautor from './Opcion_Catautor';
 import styles from './seleccion_contenido.module.css';
+import FavoriteButton from './FavoriteButton';
 
 // Inicialización del almacenamiento
 const almacenamiento = getStorage();
@@ -15,23 +16,56 @@ const RedesignedComponent = () => {
     const navegacion = useNavigate();
     const generoSeleccionado = JSON.parse(sessionStorage.getItem('Genero'));
     const indiceGenero = generos.indexOf(generoSeleccionado);
-
+    
     // Estados
+    const [userId, setUserId] = useState('1'); // Estado para el userId con valor por defecto
     const [canciones, establecerCanciones] = useState([]);
     const [cancionElegida, establecerCancionElegida] = useState(null);
     const [urlArchivo, establecerUrlArchivo] = useState('');
     const [imagenUsuario, establecerImagenUsuario] = useState(null);
     const [cancionesArtista, establecerCancionesArtista] = useState([]);
     const [urlsImagenes, establecerUrlsImagenes] = useState([]);
+    const [esListaPersonalizada, establecerEsListaPersonalizada] = useState(false);
+
+    // Obtener el ID del usuario usando el email almacenado en sessionStorage
+    useEffect(() => {
+        const datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'));
+        if (datosUsuario && datosUsuario.email) {
+            axios.get(`http://localhost:8080/api/usuarios/contacto-por-email?email=${datosUsuario.email}`)
+                .then(respuesta => {
+                    setUserId(respuesta.data);
+                    console.log('ID del usuario obtenido:', respuesta.data);
+                    
+                    // Si el género seleccionado es "Personalizado", cargamos la lista personalizada
+                    if (generoSeleccionado === 'Personalizado') {
+                        establecerEsListaPersonalizada(true);
+                        cargarListaPersonalizada(respuesta.data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener el ID del usuario:', error);
+                });
+        }
+    }, [generoSeleccionado]);
+
+    // Función para cargar la lista personalizada del usuario
+    const cargarListaPersonalizada = (idUsuario) => {
+        axios.get(`http://localhost:8080/api/listaReproduccion/usuario/${idUsuario}/canciones`)
+            .then(respuesta => {
+                establecerCanciones(respuesta.data);
+                console.log('Lista personalizada cargada:', respuesta.data);
+            })
+            .catch(error => {
+                console.error('Error al obtener la lista personalizada:', error);
+                // Si hay un error, mostramos un array vacío
+                establecerCanciones([]);
+            });
+    };
 
     // Métodos
-
     const agregarUrl = (nuevaUrl) => {
-
         const urlsActuales = [...urlsImagenes];
-
         urlsActuales.push(nuevaUrl);
-        
         establecerUrlsImagenes(urlsActuales);
     };
 
@@ -72,14 +106,17 @@ const RedesignedComponent = () => {
     }, [cancionesArtista]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/canciones/por-genero/${indiceGenero + 1}`)
-            .then(respuesta => {
-                establecerCanciones(respuesta.data);
-            })
-            .catch(error => {
-                console.error('Error al obtener las canciones:', error);
-            });
-    }, []);
+        // Solo cargamos canciones por género si no es personalizado
+        if (!esListaPersonalizada && indiceGenero !== -1 && generoSeleccionado !== 'Personalizado') {
+            axios.get(`http://localhost:8080/api/canciones/por-genero/${indiceGenero + 1}`)
+                .then(respuesta => {
+                    establecerCanciones(respuesta.data);
+                })
+                .catch(error => {
+                    console.error('Error al obtener las canciones:', error);
+                });
+        }
+    }, [indiceGenero, esListaPersonalizada]);
 
     useEffect(() => {
         const obtenerUrls = async () => {
@@ -116,6 +153,11 @@ const RedesignedComponent = () => {
         }
     }, [imagenUsuario]);
 
+    // Título de la página según el modo
+    const tituloPagina = esListaPersonalizada
+        ? "Bad Melody - Mi Lista Personalizada"
+        : `Bad Melody - ${generoSeleccionado}`;
+
     // Renderizado del componente
     return (
         <div>
@@ -128,7 +170,7 @@ const RedesignedComponent = () => {
                             alt="Album Cover"
                         />
                         <h1 style={{ alignItems: 'center' }} className={styles['logo12']}>
-                            Bad Melody - {generoSeleccionado}
+                            {tituloPagina}
                         </h1>
                         <div className={styles['overlay']}>
                             <Opcion_Cantautor />
@@ -138,32 +180,48 @@ const RedesignedComponent = () => {
 
                 <div className={styles['main-content']}>
                     <div className={styles['playlist']}>
-                        <h2>Playlist</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Song</th>
-                                    <th style={{ paddingRight: '0px', paddingLeft: "0px" }}>ㅤAño</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {canciones.map((cancion, index) => (
-                                    <tr 
-                                        key={cancion.id} 
-                                        onClick={() => seleccionarFila(cancion)} 
-                                        style={{ cursor: 'pointer' }}
-                                    >
-                                        <td>{index + 1}</td>
-                                        <td>
-                                            <div>{cancion.tituloCancion}</div>
-                                            <div>{cancion.artistaCancion.nombre}</div>
-                                        </td>
-                                        <td>{cancion.fechaSubidaCancion[0] || 'Desconocida'}</td>
+                        <h2>{esListaPersonalizada ? 'Mi Lista Personalizada' : 'Playlist'}</h2>
+                        {canciones.length > 0 ? (
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Song</th>
+                                        <th style={{ paddingRight: '20px', paddingLeft: "0px", textAlign: "end" }}>ㅤFavorita</th>
+                                        <th style={{ paddingLeft: "30px"}}>Año</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {canciones.map((cancion, index) => (
+                                        <tr 
+                                            key={cancion.id} 
+                                            onClick={() => seleccionarFila(cancion)} 
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <td>{index + 1}</td>
+                                            <td>
+                                                <div>{cancion.tituloCancion}</div>
+                                                <div>{cancion.artistaCancion.nombre}</div>
+                                            </td>
+                                            <td style={{ textAlign:"end"}} onClick={(e) => e.stopPropagation()}>
+                                                <FavoriteButton cancionId={cancion.id} userId={userId} />
+                                            </td>
+                                            <td style={{ paddingLeft: "30px"}} >
+                                                {cancion.fechaSubidaCancion[0] || 'Desconocida'}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <div className={styles['empty-list']}>
+                                {esListaPersonalizada ? (
+                                    <p>No tienes canciones en tu lista personalizada. ¡Agrega algunas marcándolas como favoritas!</p>
+                                ) : (
+                                    <p>No hay canciones disponibles en este género.</p>
+                                )}
+                            </div>
+                        )}
 
                         {cancionElegida ? (
                             <div className={styles['now-playing']}>
@@ -177,7 +235,7 @@ const RedesignedComponent = () => {
                                             <h2>{cancionElegida.artistaCancion.nombre}</h2>
                                             <h3><b>{cancionElegida.tituloCancion}</b></h3>
                                             <p style={{ marginTop: "30px" }}>
-                                                <b>Lanzamiento:</b> {`${cancionElegida.fechaSubidaCancion.slice(0, 4)}${cancionElegida.fechaSubidaCancion.slice(4, 6)}${cancionElegida.fechaSubidaCancion.slice(6)}`}
+                                                <b>Lanzamiento:</b> {`${cancionElegida.fechaSubidaCancion[0]}`}
                                             </p>
                                             <p><b>Género:</b> {cancionElegida.generoCancion.nombreGenero}</p>
                                         </div>
@@ -220,9 +278,13 @@ const RedesignedComponent = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <h4>Conoce</h4>
-                                <p>Solo Para Curioso</p>
-                                <p>Explora la historia y el sentimiento que se esconden detrás de esta melodía. Cada canción es un testimonio de la belleza y el poder de la música.</p>
+                                <h4>{esListaPersonalizada ? 'Tu Colección Personal' : 'Conoce'}</h4>
+                                <p>{esListaPersonalizada ? 'Tus Favoritos' : 'Solo Para Curioso'}</p>
+                                <p>
+                                    {esListaPersonalizada 
+                                        ? 'Aquí encontrarás todas tus canciones favoritas en un solo lugar. Disfruta de tu selección personalizada.'
+                                        : 'Explora la historia y el sentimiento que se esconden detrás de esta melodía. Cada canción es un testimonio de la belleza y el poder de la música.'}
+                                </p>
                             </div>
                         )}
 

@@ -14,4 +14,10 @@ public interface ListaReproducionService {
     public Lista crearLista(Long idUsuario, String nombreLista);
 
     public List<Cancion> obtenerCancionesPorUsuario(Long idUsuario);
+
+    boolean existeCancionEnListaPorEmail(String email, Long idCancion);
+    // en com.bad.melody.services.ListaReproducionService
+    public Lista obtenerListaPorUsuario(Long idUsuario);
+
+
 }
